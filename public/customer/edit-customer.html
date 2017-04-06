@@ -6,7 +6,7 @@
         <div class="order-form-left-section add-new-form">
 
             <div class="form-section-box">
-                <div class="form-heading">Basic Information</div>
+                <div class="form-heading">Basic Details</div>
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Customer Name</label>
@@ -39,14 +39,14 @@
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Mobile Number</label>
-                    <input ng-model="vm.customer.mobile" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10"
-                        required placeholder="Mobile Number" type="text">
+                    <input ng-model="vm.customer.mobile" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10" required
+                        placeholder="Mobile Number" type="text">
                     <span ng-if="(customerForm.mobile.$dirty || vm.isSubmitted) && customerForm.mobile.$error.required"><i><b>Mobile Number</b></i> is required.</span>
                     <span ng-if="(customerForm.mobile.$dirty || vm.isSubmitted) && (customerForm.mobile.$error.pattern || customerForm.mobile.$error.minlength || customerForm.mobile.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
                 </div>
 
                 <div class="form-box">
-                    <label> Phone Number</label>
+                    <label> Reference Mobile Number</label>
                     <input ng-model="vm.customer.phone" ng-pattern="/^[0-9]{1,11}$/" name="phonenumber" ng-minlength="11" ng-maxlength="11" placeholder="Phone Number"
                         type="text">
                     <span ng-if="(customerForm.phonenumber.$dirty || vm.isSubmitted) && (customerForm.phonenumber.$error.pattern || customerForm.phonenumber.$error.minlength || customerForm.phonenumber.$error.maxlength)">Enter a valid 11-digit <i><b>Phone Number</b></i>.</span>
@@ -64,58 +64,66 @@
 
 
             <div class="form-section-box">
-                <div class="form-heading">Document Information</div>
+                <div class="form-heading">Document Details</div>
 
                 <div>
                     <div class="form-subHeading">Proof Of Identity</div>
 
                     <div class="form-box">
                         <input ng-model="checkbox1" class="billing-addres-checkbox clothcheck" type="checkbox">
-                        <label>Adhar Card</label>
+                        <label class="text-head-align">Adhar Card</label>
 
-                        <button ng-if="checkbox1" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto1($file)" ng-model="vm.file1" ngf-pattern="'image/*'"
-                            ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required ngf-resize>Browse</button>
+                        <button ng-if="checkbox1" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto1($file)" ng-model="vm.file1"
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required
+                            ngf-resize>Browse</button>
 
                         <span ng-if="styleForm.designId.$dirty && styleForm.designId.$error.required"><i><b>Image</b></i> is required.</span>
-                        <div class="choose-image-file-bx"><img class="addsubdesign-browse-img" ng-if="checkbox1 && vm.localPicture1 || vm.style.image" ng-src="{{vm.localPicture1 || vm.style.image}}"
-                                height="200" width="200"></div>
+                            <!--<img class="addsubdesign-browse-img" ng-if="checkbox1 && vm.localPicture1 || vm.style.image" ng-src="{{vm.localPicture1 || vm.style.image}}"
+                                height="200" width="200">-->
+                            <em ng-if="checkbox1 && vm.localPicture1 || vm.style.image">{{vm.localPicture1 || vm.style.image}}</em>
 
                     </div>
 
                     <div class="form-box">
                         <input ng-model="checkbox2" class="billing-addres-checkbox clothcheck" type="checkbox">
-                        <label>Adhar Card</label>
+                        <label class="text-head-align">Driving License</label>
 
-                        <button ng-if="checkbox2" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto2($file)" ng-model="vm.file2" ngf-pattern="'image/*'"
-                            ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required ngf-resize>Browse</button>
+                        <button ng-if="checkbox2" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto2($file)" ng-model="vm.file2"
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required
+                            ngf-resize>Browse</button>
 
                         <span ng-if="styleForm.designId.$dirty && styleForm.designId.$error.required"><i><b>Image</b></i> is required.</span>
-                        <div class="choose-image-file-bx"><img class="addsubdesign-browse-img" ng-if="checkbox2 && vm.localPicture2 || vm.style.image" ng-src="{{vm.localPicture2 || vm.style.image}}"
-                                height="200" width="200"></div>
+                            <!--<img class="addsubdesign-browse-img" ng-if="checkbox2 && vm.localPicture2 || vm.style.image" ng-src="{{vm.localPicture2 || vm.style.image}}"
+                                height="200" width="200">-->
+                            <em ng-if="checkbox2 && vm.localPicture2 || vm.style.image">{{vm.localPicture2 || vm.style.image}}</em>
                     </div>
 
                     <div class="form-box">
                         <input ng-model="checkbox3" class="billing-addres-checkbox clothcheck" type="checkbox">
-                        <label>Adhar Card</label>
+                        <label class="text-head-align">Voter Id Card</label>
 
-                        <button ng-if="checkbox3" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto3($file)" ng-model="vm.file3" ngf-pattern="'image/*'"
-                            ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required ngf-resize>Browse</button>
+                        <button ng-if="checkbox3" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto3($file)" ng-model="vm.file3"
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required
+                            ngf-resize>Browse</button>
 
                         <span ng-if="styleForm.designId.$dirty && styleForm.designId.$error.required"><i><b>Image</b></i> is required.</span>
-                        <div class="choose-image-file-bx"><img class="addsubdesign-browse-img" ng-if="checkbox3 && vm.localPicture3 || vm.style.image" ng-src="{{vm.localPicture3 || vm.style.image}}"
-                                height="200" width="200"></div>
+                            <!--<img class="addsubdesign-browse-img" ng-if="checkbox3 && vm.localPicture3 || vm.style.image" ng-src="{{vm.localPicture3 || vm.style.image}}"
+                                height="200" width="200">-->
+                            <em ng-if="checkbox3 && vm.localPicture3 || vm.style.image">{{vm.localPicture3 || vm.style.image}}</em>
                     </div>
 
                     <div class="form-box">
                         <input ng-model="checkbox4" class="billing-addres-checkbox clothcheck" type="checkbox">
-                        <label>Adhar Card</label>
+                        <label class="text-head-align">Passport</label>
 
-                        <button ng-if="checkbox4" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto4($file)" ng-model="vm.file4" ngf-pattern="'image/*'"
-                            ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required ngf-resize>Browse</button>
+                        <button ng-if="checkbox4" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto4($file)" ng-model="vm.file4"
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required
+                            ngf-resize>Browse</button>
 
                         <span ng-if="styleForm.designId.$dirty && styleForm.designId.$error.required"><i><b>Image</b></i> is required.</span>
-                        <div class="choose-image-file-bx"><img class="addsubdesign-browse-img" ng-if="checkbox4 && vm.localPicture4 || vm.style.image" ng-src="{{vm.localPicture4 || vm.style.image}}"
-                                height="200" width="200"></div>
+                            <!--<img class="addsubdesign-browse-img" ng-if="checkbox4 && vm.localPicture4 || vm.style.image" ng-src="{{vm.localPicture4 || vm.style.image}}"
+                                height="200" width="200">-->
+                            <em ng-if="checkbox4 && vm.localPicture4 || vm.style.image">{{vm.localPicture4 || vm.style.image}}</em>
                     </div>
                 </div>
 
@@ -124,26 +132,30 @@
 
                     <div class="form-box-lable-right-input">
                         <input ng-model="checkbox5" class="billing-addres-checkbox clothcheck" type="checkbox">
-                        <label>Adhar Card</label>
+                        <label class="text-head-align">Recent Telephone Bill</label>
 
-                        <button ng-if="checkbox5" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto5($file)" ng-model="vm.file5" ngf-pattern="'image/*'"
-                            ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required ngf-resize>Browse</button>
+                        <button ng-if="checkbox5" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto5($file)" ng-model="vm.file5"
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required
+                            ngf-resize>Browse</button>
 
                         <span ng-if="styleForm.designId.$dirty && styleForm.designId.$error.required"><i><b>Image</b></i> is required.</span>
-                        <div class="choose-image-file-bx"><img class="addsubdesign-browse-img" ng-if="checkbox5 && vm.localPicture5 || vm.style.image" ng-src="{{vm.localPicture5 || vm.style.image}}"
-                                height="200" width="200"></div>
+                            <!--<img class="addsubdesign-browse-img" ng-if="checkbox5 && vm.localPicture5 || vm.style.image" ng-src="{{vm.localPicture5 || vm.style.image}}"
+                                height="200" width="200">-->
+                            <em ng-if="checkbox5 && vm.localPicture5 || vm.style.image">{{vm.localPicture5 || vm.style.image}}</em>
                     </div>
 
                     <div class="form-box">
                         <input ng-model="checkbox6" class="billing-addres-checkbox clothcheck" type="checkbox">
-                        <label>Adhar Card</label>
+                        <label class="text-head-align">Recent Electricity Bill</label>
 
-                        <button ng-if="checkbox6" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto6($file)" ng-model="vm.file6" ngf-pattern="'image/*'"
-                            ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required ngf-resize>Browse</button>
+                        <button ng-if="checkbox6" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto6($file)" ng-model="vm.file6"
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-required
+                            ngf-resize>Browse</button>
 
                         <span ng-if="styleForm.designId.$dirty && styleForm.designId.$error.required"><i><b>Image</b></i> is required.</span>
-                        <div class="choose-image-file-bx"><img class="addsubdesign-browse-img" ng-if="checkbox6 && vm.localPicture6 || vm.style.image" ng-src="{{vm.localPicture6 || vm.style.image}}"
-                                height="200" width="200"></div>
+                            <!--<img class="addsubdesign-browse-img" ng-if="checkbox6 && vm.localPicture6 || vm.style.image" ng-src="{{vm.localPicture6 || vm.style.image}}"
+                                height="200" width="200">-->
+                            <em ng-if="checkbox6 && vm.localPicture6 || vm.style.image">{{vm.localPicture6 || vm.style.image}}</em>
                     </div>
                 </div>
 

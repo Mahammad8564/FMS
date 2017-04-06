@@ -5,7 +5,7 @@
 
     angular.module('myra').controller('LoanController', LoanController);
 
-    LoanController.$inject = ['Authentication','Restangular', '$state', 'SweetAlert', '$stateParams'];
+    LoanController.$inject = ['Authentication', 'Restangular', '$state', 'SweetAlert', '$stateParams'];
 
     function LoanController(Authentication, Restangular, $state, SweetAlert, $stateParams) {
         var vm = this;
@@ -25,7 +25,7 @@
             search: ''
         }
         vm.today = new Date();
-        //vm.getMeasurementList = getMeasurementList;
+        vm.getCustomerList = getCustomerList;
 
         function edit(obj) {
             $state.go('secure.edit-customer', { id: obj.id });
@@ -72,13 +72,12 @@
                 vm.options.totalItems = parseInt(res.headers('total'));
             });
         }
-        //function getMeasurementList() {
-        //    Restangular.all('api/measurement').getList().then(function (res) {
-        //        vm.mesaurements = res;
-        //        vm.mesaurements = _.filter(vm.mesaurements, ['isActive', true]);
-        //    });
-        //}
 
+        function getCustomerList() {
+            Restangular.all('api/customer').getList().then(function (res) {
+                vm.customers = res.data;
+            });
+        }
 
         function pageChange() {
             getList();

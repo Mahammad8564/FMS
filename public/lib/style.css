@@ -640,6 +640,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00BFFF', end
 .form-section-box .birthdate{width:18% !important; float: left; margin-right: 12px;}
 .form-box{width:100%; display: inline-block;position: relative;}
 
+.text-head-align {    
+    /*width: 28% !important;*/
+    text-align: left !important;
+    font-weight: 400 !important;}
+
 .customization-check-box{width: 70%; float: left;}
 .form-section-box .form-box .customization-check-box .checkbox{
   float: left;

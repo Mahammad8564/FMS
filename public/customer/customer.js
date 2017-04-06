@@ -34,32 +34,32 @@
 
         function displayPhoto1(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture1 = url;
+                vm.localPicture1 = file.name;
             });
         }
         function displayPhoto2(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture2 = url;
+                vm.localPicture2 = file.name;
             });
         }
         function displayPhoto3(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture3 = url;
+                vm.localPicture3 = file.name;
             });
         }
         function displayPhoto4(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture4 = url;
+                vm.localPicture4 = file.name;
             });
         }
         function displayPhoto5(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture5 = url;
+                vm.localPicture5 = file.name;
             });
         }
         function displayPhoto6(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture6 = url;
+                vm.localPicture6 = file.name;
             });
         }
 

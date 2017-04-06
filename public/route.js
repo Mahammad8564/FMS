@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular.module('myra')
@@ -13,7 +13,7 @@
                 templateUrl: '/login/login.html',
                 controller: 'LoginController',
                 controllerAs: 'vm',
-                title : 'Login',
+                title: 'Login',
                 onEnter: ['$state', 'Authentication', function ($state, Authentication) {
                     if (Authentication.isAuthenticated()) {
                         $state.go('secure.home');
@@ -95,6 +95,14 @@
                 controller: 'LoanController',
                 controllerAs: 'vm'
             })
+            .state('secure.loan-detail', {
+                url: '/customer/{customerId}/loan',
+                templateUrl: '/loan/loan-detail.html',
+                title: 'Customer loan',
+                highlight: 'loan',
+                controller: 'LoanController',
+                controllerAs: 'vm'
+            })
             .state('secure.reports', {
                 url: '/reports',
                 templateUrl: '/reports/reports.html',
@@ -141,7 +149,7 @@
                 templateUrl: '/setting/user/user.html',
                 title: 'User',
                 highlight: 'user',
-                highLightSetting : 'setting',
+                highLightSetting: 'setting',
                 controller: 'UserController',
                 controllerAs: 'vm'
             })
