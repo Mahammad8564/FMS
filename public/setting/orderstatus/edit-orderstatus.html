@@ -19,7 +19,7 @@
                     <label><em id="mandatory" style="color:Red">*</em>Interest Rate </label>
                     <input class="Interest-rate-input" id="username" name="title" required type="text" ng-model="vm.orderStatus.interestRate" ng-minlength="2"
                         ng-maxlength="30">
-                    <select style="width: 20%;" ng-init="vm.frequency = 'today'" ng-model="vm.frequency">
+                    <select class="loan-option-percent-drop-down" ng-init="vm.frequency = 'today'" ng-model="vm.frequency">
                             <option value="today">Percentage</option>
                             <option value="week">Number</option>
                     </select>
@@ -33,7 +33,7 @@
                     <label><em id="mandatory" style="color:Red">*</em>Other Charges</label>
                     <input class="Interest-rate-input" id="username" name="title" required type="text" ng-model="vm.orderStatus.otherCharges" ng-minlength="2"
                         ng-maxlength="30">
-                    <select style="width: 20%;" ng-init="vm.frequency2 = 'today'" ng-model="vm.frequency2">
+                    <select class="loan-option-percent-drop-down" ng-init="vm.frequency2 = 'today'" ng-model="vm.frequency2">
                             <option value="today">Percentage</option>
                             <option value="week">Number</option>
                     </select>
