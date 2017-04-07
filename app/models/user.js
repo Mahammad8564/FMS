@@ -53,8 +53,8 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function (models) {
-                User.hasMany(models.Customer);
-                User.hasMany(models.Agent);
+                // User.hasMany(models.Customer);
+                // User.hasMany(models.Agent);
             }
         }
     }

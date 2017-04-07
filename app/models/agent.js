@@ -25,12 +25,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
-                    Agent.belongsTo(models.User, {
-                        onDelete: "CASCADE",
-                        foreignKey: {
-                            allowNull: false
-                        }
-                    });
+                    Agent.hasMany(models.Customer);
                 }
             }
         }

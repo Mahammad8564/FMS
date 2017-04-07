@@ -62,11 +62,9 @@ module.exports = function (sequelize, DataTypes) {
             classMethods: {
                 associate: function (models) {
 
-                    // Customer.hasMany(models.Loan);
+                    Customer.hasMany(models.Loan);
 
-                    Customer.hasMany(models.Agent);
-
-                    Customer.belongsTo(models.User, {
+                    Customer.belongsTo(models.Agent, {
                         onDelete: "CASCADE",
                         foreignKey: {
                             allowNull: false

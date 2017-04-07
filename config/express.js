@@ -51,6 +51,7 @@ module.exports = function(){
     require('../app/routes/index.js')(app);
     require('../app/routes/customer.js')(app);
     require('../app/routes/agent.js')(app);
+    require('../app/routes/loan.js')(app);
     require('../app/routes/orderStatus.js')(app);
 
     app.use(express.static('./public'));

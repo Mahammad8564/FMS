@@ -17,21 +17,30 @@
         vm.search = search;
         vm.order = order;
         vm.pageChange = pageChange;
-        vm.orderDetail = orderDetail;
-        vm.options = {
-            pagesize: 10,
-            totalItems: 0,
-            page: 1,
-            search: ''
-        }
+        vm.loanDetail = loanDetail;
+        // vm.options = {
+        //     pagesize: 10,
+        //     totalItems: 0,
+        //     page: 1,
+        //     search: ''
+        // }
         vm.today = new Date();
         vm.getCustomerList = getCustomerList;
+        vm.getLoanTypeList = getLoanTypeList;
+        vm.getCustomerByLoan = getCustomerByLoan;
+        vm.changeLoanType = changeLoanType;
+        vm.hideBasicDetails = true;
+
+        if ($stateParams.customerId != null) {
+            vm.hideBasicDetails = false;
+            vm.CustomerId = $stateParams.customerId;
+        }
 
         function edit(obj) {
-            $state.go('secure.edit-customer', { id: obj.id });
+            $state.go('secure.edit-loan', { id: obj.id });
         }
-        function orderDetail(obj) {
-            $state.go('secure.customer-order-detail', { customerId: obj.id });
+        function loanDetail(obj) {
+            $state.go('secure.loan-detail', { customerId: obj.id });
         }
 
         function save(form) {
@@ -43,11 +52,37 @@
                 return;
             }
             vm.startProcessing = true;
-            vm.customer.UserId = Authentication.user.id;
-            if (!vm.customer.id) {
-                Restangular.all('api/customer').post(vm.customer).then(function (res) {
-                    SweetAlert.swal("Customer saved successfully!");
-                    $state.go('secure.customer');
+            vm.loan.installmentAmount = 76787;
+            vm.loan.interestRate = vm.interestRate;
+            vm.loan.otherCharges = vm.otherCharges;
+            vm.loan.status = 'unpaid';
+            vm.loan.OrderStatusId = vm.loanTypeId;
+            if (vm.customer) {
+                Restangular.all('api/customer').post({ customer: vm.customer }).then(function (res) {
+                    // SweetAlert.swal("customer saved successfully!");
+                    // $state.go('secure.loan');
+                    vm.loan.CustomerId = res.data.id;
+                    Restangular.all('api/loan').post(vm.loan).then(function (res) {
+                        SweetAlert.swal("loan saved successfully!");
+                        $state.go('secure.loan');
+                    }, function (err) {
+                        console.log(err);
+                        vm.error = err.data.message;
+                        vm.startProcessing = false;
+                    });
+
+                }, function (err) {
+                    console.log(err);
+                    vm.error = err.data.message;
+                    vm.startProcessing = false;
+                });
+
+            }
+            else if (!vm.loan.id) {
+                vm.loan.CustomerId = vm.CustomerId;
+                Restangular.all('api/loan').post(vm.loan).then(function (res) {
+                    SweetAlert.swal("loan saved successfully!");
+                    $state.go('secure.loan');
                 }, function (err) {
                     console.log(err);
                     vm.error = err.data.message;
@@ -55,9 +90,9 @@
                 });
             }
             else {
-                Restangular.one('api/customer/' + vm.customer.id).patch(vm.customer).then(function (res) {
-                    SweetAlert.swal("Customer updated successfully!");
-                    $state.go('secure.customer');
+                Restangular.one('api/loan/' + vm.loan.id).patch(vm.loan).then(function (res) {
+                    SweetAlert.swal("loan updated successfully!");
+                    $state.go('secure.loan');
                 }, function (err) {
                     console.log(err);
                     vm.error = err.data.message;
@@ -67,7 +102,7 @@
         }
 
         function getList() {
-            Restangular.all('api/customer').getList(vm.options).then(function (res) {
+            Restangular.all('api/loan').getList(vm.options).then(function (res) {
                 vm.list = res.data;
                 vm.options.totalItems = parseInt(res.headers('total'));
             });
@@ -76,6 +111,12 @@
         function getCustomerList() {
             Restangular.all('api/customer').getList().then(function (res) {
                 vm.customers = res.data;
+            });
+        }
+
+        function getLoanTypeList() {
+            Restangular.all('api/orderStatus').getList().then(function (res) {
+                vm.loanTypes = res.data;
             });
         }
 
@@ -98,42 +139,27 @@
         }
 
         function activate() {
-            Restangular.all('api/measurement').getList().then(function (res) {
-                vm.mesaurements = res.data;
-                vm.customer = {
-                    CustomerMeasurements: []
-                };
-                var arr = [];
-                _.forEach(vm.mesaurements, function (msr) {
-                    if (msr.isActive) {
-                        arr.push({ val: '', MeasurementId: msr.id, Measurement: msr });
-                    }
-                });
-                if ($stateParams.id != 'new') {
-                    Restangular.one('api/customer/' + $stateParams.id).get().then(function (res) {
-                        vm.customer = res.data;
-                        vm.customer.dob = new Date(vm.customer.dob);
-                        vm.customer.annerversary = new Date(vm.customer.annerversary);
+            Restangular.one('api/loan/' + $stateParams.id).get().then(function (res) {
+                if (res.data) { vm.hideBasicDetails = false; }
 
-                        _.forEach(arr, function (msr) {
-                            //check for value for user
-                            var chk = _.find(vm.customer.CustomerMeasurements, ['MeasurementId', msr.MeasurementId]);
-                            if (chk) {
-                                msr.val = chk.val;
-                            }
-                        });
-                        vm.customer.CustomerMeasurements = vm.customer.CustomerMeasurements || [];
-                        vm.customer.CustomerMeasurements = arr;
-                    });
-                }
-                else {
-                    vm.customer.CustomerMeasurements = arr;
-                }
-
+                vm.loan = res.data;
+                vm.loan.date = new Date(vm.loan.date);
             });
-
-
         }
+
+        function getCustomerByLoan() {
+            Restangular.one('api/loan/' + $stateParams.customerId).get().then(function (res) {
+                vm.customerDetails = res.data;
+            });
+        }
+
+        function changeLoanType() {
+            Restangular.one('api/orderStatus/' + vm.loanTypeId).get().then(function (res) {
+                vm.interestRate = parseInt(res.data.interestRate);
+                vm.otherCharges = parseInt(res.data.otherCharges);
+            });
+        }
+
     }
 
 })();

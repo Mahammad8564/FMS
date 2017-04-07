@@ -87,7 +87,8 @@
             .state('secure.edit-loan', {
                 url: '/loan/{id}',
                 params: {
-                    id: { value: 'new' }
+                    id: { value: 'new' },
+                    customerId : { value : null}
                 },
                 templateUrl: '/loan/edit-loan.html',
                 title: 'Loan',
@@ -96,7 +97,10 @@
                 controllerAs: 'vm'
             })
             .state('secure.loan-detail', {
-                url: '/customer/{customerId}/loan',
+                url: '/loandetail',
+                params: {
+                    customerId : { value : null}
+                },
                 templateUrl: '/loan/loan-detail.html',
                 title: 'Customer loan',
                 highlight: 'loan',

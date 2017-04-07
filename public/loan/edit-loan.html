@@ -1,35 +1,35 @@
-﻿<div class="inner-heading-bar">Add/Edit Customer Details</div>
+﻿<div class="inner-heading-bar">Add/Edit Loan Details</div>
 
 <div class="main-contant-part" ng-init="vm.activate()">
     <!-- Customer Details page Section Start Here -->
-    <form name="customerForm" novalidate>
-        <div class="order-form-left-section add-new-form">
 
-            <div class="form-section-box">
+    <div class="order-form-left-section add-new-form">
+        <form name="loanForm" novalidate>
+            <div class="form-section-box" ng-if="vm.hideBasicDetails">
                 <div class="form-heading">Basic Details</div>
 
-                <div class="form-box" style="margin-bottom: 20px;" ng-init="checkCustomer = 'new'">
-                    <input ng-model="checkCustomer" value="new" class="billing-addres-checkbox clothcheck" name="customerRadio" type="radio">
+                <div class="form-box" style="margin-bottom: 20px;" ng-init="vm.checkCustomer = 'new'">
+                    <input ng-model="vm.checkCustomer" value="new" class="billing-addres-checkbox clothcheck" name="customerRadio" type="radio">
                     <label class="text-head-align">New Customer</label>
 
-                    <input ng-model="checkCustomer" value="existing" class="billing-addres-checkbox clothcheck" name="customerRadio" type="radio">
+                    <input ng-model="vm.checkCustomer" value="existing" class="billing-addres-checkbox clothcheck" name="customerRadio" type="radio">
                     <label class="text-head-align">Existing Customer</label>
                 </div>
 
-                <div class="form-box" ng-if="checkCustomer == 'existing'">
+                <div class="form-box" ng-if="vm.checkCustomer == 'existing'">
                     <label>Select Customer</label>
-                    <select class="paragraph" name="customeruser" ng-model="vm.CustomerId" ng-change="vm.searchByField()" ng-init="vm.getCustomerList()">
+                    <select class="paragraph" name="customeruser" ng-model="vm.CustomerId" ng-init="vm.getCustomerList()">
                         <option value="">Please Select</option>
                         <option value="{{os.id}}" ng-repeat="os in vm.customers">{{os.name}}</option>
                     </select>
                 </div>
 
-                <div ng-if="checkCustomer == 'new'">
+                <div ng-if="vm.checkCustomer == 'new'">
 
                     <div class="form-box">
                         <label><em id="mandatory" style="color:Red">*</em>Customer Name</label>
-                        <input id="" my-directive="" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.customer.name"
-                            name="name" required placeholder="Customer Name" type="text">
+                        <input ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.customer.name" name="name" required
+                            placeholder="Customer Name" type="text">
                         <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.pattern">No special characters are allowed.</span>
                         <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.required"><i><b>Customer Name</b></i> is required.</span>
                         <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.minlength"><i><b>Customer Name</b></i> should be at least 2 characters long.</span>
@@ -80,75 +80,65 @@
                     </div>
                 </div>
             </div>
+        </form>
+
+        <form name="loanForm" novalidate>
 
             <div class="form-section-box">
                 <div class="form-heading">Loan Details</div>
 
                 <div class="form-box">
                     <label>Loan Date</label>
-                    <input type="date" readonly name="dob" uib-datepicker-popup="" is-open="open.dob" convert-to-date ng-model="vm.customer.dob"
-                        ng-click="open.dob = !open.dob" ng-max="vm.today">
-                    <span ng-if="(customerForm.dob.$dirty || vm.isSubmitted) && customerForm.dob.$error.max"><i><b>Birth Date</b></i> should not be future date.</span>
+                    <input type="date" readonly name="loanDate" uib-datepicker-popup="" is-open="open.loanDate" convert-to-date ng-model="vm.loan.date"
+                        ng-click="open.loanDate = !open.loanDate" ng-max="vm.today">
+                    <span ng-if="(loanForm.loanDate.$dirty || vm.isSubmitted) && loanForm.loanDate.$error.max"><i><b>Loan Date</b></i> should not be future date.</span>
                 </div>
 
                 <div class="form-box">
                     <label><em style="color:Red">*</em>Loan Type</label>
-                    <select required class="paragraph " name="gender" ng-model="vm.customer.gender">
+                    <select class="paragraph" name="loanType" ng-model="vm.loanTypeId" ng-change="vm.changeLoanType()" ng-init="vm.getLoanTypeList()">
                         <option value="">Please Select</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
+                        <option value="{{os.id}}" ng-repeat="os in vm.loanTypes">{{os.title}}</option>
                     </select>
-                    <span ng-if="(customerForm.gender.$dirty || vm.isSubmitted) && customerForm.gender.$error.required"><i><b>Gender</b></i> is required.</span>
+                    <span ng-if="(loanForm.gender.$dirty || vm.isSubmitted) && loanForm.gender.$error.required"><i><b>Loan Type</b></i> is required.</span>
+                </div>
+
+                <div class="form-box">
+                    <label><em id="mandatory" style="color:Red">*</em>Loan Amount</label>
+                    <input ng-model="vm.loan.loanAmount" name="loanAmount" required type="number">
+                    <span ng-if="(loanForm.loanAmount.$dirty || vm.isSubmitted) && loanForm.loanAmount.$error.required"><i><b>Loan Amount</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Loan Tenure</label>
-                    <input id="" my-directive="" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.customer.name"
-                        name="name" required type="text">
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.pattern">No special characters are allowed.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.required"><i><b>Customer Name</b></i> is required.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.minlength"><i><b>Customer Name</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.maxlength"><i><b>Customer Name</b></i> should not be more than 50 characters long.</span>
+                    <input class="Interest-rate-input" name="loanTenure" required type="number" ng-model="vm.loan.loanTenure">
+                    <select class="loan-option-percent-drop-down" ng-init="vm.loan.loanTenureOption = 'day'" ng-model="vm.loan.loanTenureOption">
+                            <option value="day">Days</option>
+                            <option value="week">Weeks</option>
+                            <option value="month">Months</option>
+                    </select>
+                    <span ng-if="(orderStatusForm.loanTenure.$dirty || vm.isSubmitted)  && orderStatusForm.loanTenure.$error.required"><i><b>Loan Tenure</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Disbursement Amount</label>
-                    <input id="" my-directive="" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.customer.name"
-                        name="name" required type="text">
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.pattern">No special characters are allowed.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.required"><i><b>Customer Name</b></i> is required.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.minlength"><i><b>Customer Name</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.maxlength"><i><b>Customer Name</b></i> should not be more than 50 characters long.</span>
+                    <input ng-model="vm.loan.disbursementAmount" name="disbursementAmount" required type="number">
+                    <span ng-if="(loanForm.disbursementAmount.$dirty || vm.isSubmitted) && loanForm.disbursementAmount.$error.required"><i><b>Disbursement Amount</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
-                    <label><em id="mandatory" style="color:Red">*</em>Interest Rate</label>
-                    <input id="" my-directive="" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.customer.name"
-                        name="name" required type="text" disabled>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.pattern">No special characters are allowed.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.required"><i><b>Customer Name</b></i> is required.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.minlength"><i><b>Customer Name</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.maxlength"><i><b>Customer Name</b></i> should not be more than 50 characters long.</span>
+                    <label>Interest Rate</label>
+                    <input ng-model="vm.interestRate" name="interestRate" type="number" disabled>
                 </div>
 
                 <div class="form-box">
-                    <label><em id="mandatory" style="color:Red">*</em>Other Cahrges</label>
-                    <input id="" my-directive="" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.customer.name"
-                        name="name" required type="text" disabled>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.pattern">No special characters are allowed.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.required"><i><b>Customer Name</b></i> is required.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.minlength"><i><b>Customer Name</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.maxlength"><i><b>Customer Name</b></i> should not be more than 50 characters long.</span>
+                    <label>Other Cahrges</label>
+                    <input ng-model="vm.otherCharges" name="otherCharges" type="number" disabled>
                 </div>
 
                 <div class="form-box">
-                    <label><em id="mandatory" style="color:Red">*</em>Total Amount</label>
-                    <input id="" my-directive="" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.customer.name"
-                        name="name" required type="text" disabled>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.pattern">No special characters are allowed.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.required"><i><b>Customer Name</b></i> is required.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.minlength"><i><b>Customer Name</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.maxlength"><i><b>Customer Name</b></i> should not be more than 50 characters long.</span>
+                    <label>Total Amount</label>
+                    <input ng-model="vm.loan.totalAmount" name="totalAmount" type="number">
                 </div>
 
             </div>
@@ -158,29 +148,29 @@
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Guarantor Name</label>
-                    <input id="" my-directive="" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.customer.name"
-                        name="name" required type="text">
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.pattern">No special characters are allowed.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.required"><i><b>Customer Name</b></i> is required.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.minlength"><i><b>Customer Name</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(customerForm.name.$dirty || vm.isSubmitted) && customerForm.name.$error.maxlength"><i><b>Customer Name</b></i> should not be more than 50 characters long.</span>
+                    <input ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50" ng-model="vm.loan.guarantorName" name="guarantorName"
+                        required type="text">
+                    <span ng-if="(loanForm.guarantorName.$dirty || vm.isSubmitted) && loanForm.guarantorName.$error.pattern">No special characters are allowed.</span>
+                    <span ng-if="(loanForm.guarantorName.$dirty || vm.isSubmitted) && loanForm.guarantorName.$error.required"><i><b>Guarantor Name</b></i> is required.</span>
+                    <span ng-if="(loanForm.guarantorName.$dirty || vm.isSubmitted) && loanForm.guarantorName.$error.minlength"><i><b>Guarantor Name</b></i> should be at least 2 characters long.</span>
+                    <span ng-if="(loanForm.guarantorName.$dirty || vm.isSubmitted) && loanForm.guarantorName.$error.maxlength"><i><b>Guarantor Name</b></i> should not be more than 50 characters long.</span>
                 </div>
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Mobile Number</label>
-                    <input ng-model="vm.customer.mobile" ng-pattern="/^[0-9]{1,10}$/" name="mobilenumber" ng-minlength="10" ng-maxlength="10"
+                    <input ng-model="vm.loan.mobileNumber" ng-pattern="/^[0-9]{1,10}$/" name="mobileNumber" ng-minlength="10" ng-maxlength="10"
                         required type="text">
-                    <span ng-if="(customerForm.mobilenumber.$dirty || vm.isSubmitted) && customerForm.mobilenumber.$error.required"><i><b>Mobile Number</b></i> is required.</span>
-                    <span ng-if="(customerForm.mobilenumber.$dirty || vm.isSubmitted) && (customerForm.mobilenumber.$error.pattern || customerForm.mobilenumber.$error.minlength || customerForm.mobilenumber.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
+                    <span ng-if="(loanForm.mobileNumber.$dirty || vm.isSubmitted) && loanForm.mobileNumber.$error.required"><i><b>Mobile Number</b></i> is required.</span>
+                    <span ng-if="(loanForm.mobileNumber.$dirty || vm.isSubmitted) && (loanForm.mobileNumber.$error.pattern || loanForm.mobileNumber.$error.minlength || loanForm.mobileNumber.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
 
                 </div>
 
                 <div class="form-box">
                     <label><em style="color:Red">*</em>Address</label>
-                    <textarea required ng-model="vm.customer.address" rows="4" cols="50" name="address" ng-minlength="2" ng-maxlength="250"></textarea>
-                    <span ng-if="(customerForm.address.$dirty || vm.isSubmitted) && customerForm.address.$error.required"><i><b>Address</b></i> is required.</span>
-                    <span ng-if="(customerForm.address.$dirty || vm.isSubmitted) && customerForm.address.$error.minlength"><i><b>Address</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(customerForm.address.$dirty || vm.isSubmitted) && customerForm.address.$error.maxlength"><i><b>Address</b></i> should not be more than 250 characters long.</span>
+                    <textarea required ng-model="vm.loan.address" rows="4" cols="50" name="address" ng-minlength="2" ng-maxlength="250"></textarea>
+                    <span ng-if="(loanForm.address.$dirty || vm.isSubmitted) && loanForm.address.$error.required"><i><b>Address</b></i> is required.</span>
+                    <span ng-if="(loanForm.address.$dirty || vm.isSubmitted) && loanForm.address.$error.minlength"><i><b>Address</b></i> should be at least 2 characters long.</span>
+                    <span ng-if="(loanForm.address.$dirty || vm.isSubmitted) && loanForm.address.$error.maxlength"><i><b>Address</b></i> should not be more than 250 characters long.</span>
                 </div>
 
                 <div class="add-new-btm-btn edit-customer-detail-btn-btn-left-mar-none">
@@ -188,19 +178,22 @@
                         <div>{{vm.error}}</div>
                     </div>
                     <div class="submit-button">
-                        <input ng-disabled="vm.startProcessing" value="Save" ng-click="vm.save(customerForm)" type="button">
+                        <input ng-disabled="vm.startProcessing" value="Save" ng-click="vm.save(loanForm)" type="button">
                     </div>
                     <div class="cancel-button">
-                        <input value="Cancel" ui-sref="secure.customer" type="button">
+                        <input value="Cancel" ui-sref="secure.loan" type="button">
                     </div>
                 </div>
 
 
             </div>
+        </form>
+        <!-- Left Form Section End Here -->
 
-            <!-- Left Form Section End Here -->
+    </div>
 
-        </div>
-    </form>
     <!-- Customer Details page Section End Here -->
 </div>
+
+
+<!--ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-minlength="2" ng-maxlength="50"-->

@@ -6,22 +6,6 @@
             <div class="form-section-box form-section-box-2">
                 <fieldset ng-disabled="vm.currentUser.userrole != 'admin'" style="border:none">
 
-                    <!--<div class="form-box">
-                        <label><em style="color:Red">*</em>Username</label>
-                        <input name="username" placeholder="Username" type="text" ng-model="vm.user.username" required>
-                        <span ng-if="(userForm.username.$dirty || vm.isSubmitted) && userForm.username.$error.required"><i><b>Username</b></i> is required.</span>
-                        <span ng-if="(userForm.username.$dirty || vm.isSubmitted) && userForm.username.$error.minlength"><i><b>Username</b></i> should be at least 2 characters long.</span>
-                        <span ng-if="(userForm.username.$dirty || vm.isSubmitted) && userForm.username.$error.maxlength"><i><b>Username</b></i> should not be more than 50 characters long.</span>
-                    </div>-->
-
-                    <!--<div class="form-box">
-                        <label><em style="color:Red">*</em>Full Name</label>
-                        <input name="fullname" placeholder="Full Name" type="text" ng-model="vm.user.fullname" required ng-disabled="vm.user.id">
-                        <span ng-if="(userForm.fullname.$dirty || vm.isSubmitted) && userForm.fullname.$error.required"><i><b>Full Name</b></i> is required.</span>
-                        <span ng-if="(userForm.fullname.$dirty || vm.isSubmitted) && userForm.fullname.$error.minlength"><i><b>Full Name</b></i> should be at least 2 characters long.</span>
-                        <span ng-if="(userForm.fullname.$dirty || vm.isSubmitted) && userForm.fullname.$error.maxlength"><i><b>Full Name</b></i> should not be more than 50 characters long.</span>
-                    </div>-->
-
                     <div class="form-box">
                         <label><em style="color:Red">*</em>Old Password</label>
                         <input name="oldPassword" ng-minlength="6" ng-maxlength="25" required type="oldPassword" ng-model="vm.user1.oldPassword">

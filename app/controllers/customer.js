@@ -1,5 +1,6 @@
 ﻿var models = require('../models');
 var Customer = models.Customer;
+var Loan = models.Loan;
 var User = models.User;
 var Sequelize = require('sequelize');
 var _ = require('underscore');
@@ -36,14 +37,14 @@ var getErrorMessage = function (err) {
 //For Geting list of Measurements
 exports.list = function (req, res) {
     //include: [{ model: User, as: 'createdBy' }]
-    // req.options.include = [{ model: User, as: 'createdBy', attributes: ['username', 'id', 'fullname'] }, { model: CustomerMeasurement }];
+    req.options.include = [Loan];
     // req.options.distinct = true;
     Customer.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
         res.json(arrs.rows);
     }).catch(function (err) {
         console.log(err);
-        res.staus(400).send({ message: getErrorMessage(err) });
+        res.status(400).send({ message: getErrorMessage(err) });
     });
 }
 

@@ -17,7 +17,9 @@
         vm.order = order;
         vm.activate = activate;
         vm.pageChange = pageChange;
-        vm.orderDetail = orderDetail;
+        vm.editLeave = editLeave;
+        vm.loanDetail = loanDetail;
+        vm.addLoan = addLoan;
         vm.options = {
             pagesize: 10,
             totalItems: 0,
@@ -66,41 +68,15 @@
         function edit(obj) {
             $state.go('secure.edit-customer', { id: obj.id });
         }
-        function orderDetail(obj) {
-            $state.go('secure.customer-order-detail', { customerId: obj.id });
+        function editLeave(obj) {
+            $state.go('secure.edit-loan', { id: obj.id });
         }
-
-        // function save(form) {
-        //     if (form.$invalid) {
-        //         _.forEach(form.$error.required, function (frm) {
-        //             frm.$setDirty();
-        //         });
-        //         vm.isSubmitted = true;
-        //         return;
-        //     }
-        //     vm.startProcessing = true;
-        //     vm.customer.UserId = Authentication.user.id;
-        //     if (!vm.customer.id) {
-        //         Restangular.all('api/customer').post(vm.customer).then(function (res) {
-        //             SweetAlert.swal("Customer saved successfully!");
-        //             $state.go('secure.customer');
-        //         }, function (err) {
-        //             console.log(err);
-        //             vm.error = err.data.message;
-        //             vm.startProcessing = false;
-        //         });
-        //     }
-        //     else {
-        //         Restangular.one('api/customer/' + vm.customer.id).patch(vm.customer).then(function (res) {
-        //             SweetAlert.swal("Customer updated successfully!");
-        //             $state.go('secure.customer');
-        //         }, function (err) {
-        //             console.log(err);
-        //             vm.error = err.data.message;
-        //             vm.startProcessing = false;
-        //         });
-        //     }
-        // }
+        function addLoan(obj) {
+            $state.go('secure.edit-loan', { customerId: obj.id });
+        }
+        function loanDetail(obj) {
+            $state.go('secure.loan-detail', { customerId: obj.id });
+        }
 
         function save(form) {
             if (form.$invalid) {
