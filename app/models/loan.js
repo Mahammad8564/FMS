@@ -1,21 +1,21 @@
 "use strict";
 module.exports = function (sequelize, DataTypes) {
     var Loan = sequelize.define("Loan", {
-        loanAmount: {
-            type: DataTypes.DECIMAL,
-            allowNull: false
+        date: {
+            type: DataTypes.DATE,
+            allowNull: false,
         },
         loanTenure: {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        date: {
-            type: DataTypes.DATE,
+        loanTenureOption: {
+            type: DataTypes.DECIMAL,
             allowNull: false,
         },
         installmentAmount: {
             type: DataTypes.DECIMAL,
-            allowNull: false,
+            allowNull: true,
         },
         disbursementAmount: {
             type: DataTypes.DECIMAL,
@@ -25,11 +25,15 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        otherCharges: {
-            type: DataTypes.DECIMAL,
-            allowNull: false,
+        insOther: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
-        totalAmount: {
+        processingCharge: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        loanAmount: {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
@@ -49,7 +53,6 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
-
         isActive: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
@@ -58,12 +61,16 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
+                    
+                    Loan.hasMany(models.Installment);
+
                     Loan.belongsTo(models.Customer, {
                         onDelete: "CASCADE",
                         foreignKey: {
                             allowNull: false
                         }
                     });
+
                     Loan.belongsTo(models.OrderStatus, {
                         onDelete: "CASCADE",
                         foreignKey: {

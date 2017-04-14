@@ -34,6 +34,7 @@
         }
 
         function save(form) {
+            console.log(vm.orderStatus);
             if (form.$invalid) {
                 _.forEach(form.$error.required, function (frm) {
                     frm.$setDirty();

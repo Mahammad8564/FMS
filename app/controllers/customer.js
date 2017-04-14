@@ -120,10 +120,10 @@ exports.create = function (req, res) {
 // }
 
 exports.update = function (req, res) {
-
+console.log(req.body);
     Customer.update(req.body, {
         where: {
-            id: req.body.id
+            id: req.params.customerId
         }
     }).then(function (obj) {
         return res.json(obj);

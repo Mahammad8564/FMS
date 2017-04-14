@@ -16,31 +16,38 @@
                 </div>
 
                 <div class="form-box">
-                    <label><em id="mandatory" style="color:Red">*</em>Interest Rate </label>
-                    <input class="Interest-rate-input" id="username" name="title" required type="text" ng-model="vm.orderStatus.interestRate" ng-minlength="2"
-                        ng-maxlength="30">
-                    <select class="loan-option-percent-drop-down" ng-init="vm.frequency = 'today'" ng-model="vm.frequency">
-                            <option value="today">Percentage</option>
-                            <option value="week">Number</option>
-                    </select>
+                    <label><em id="mandatory" style="color:Red">*</em>Interest Rate (%) </label>
+                    <input id="username" name="title" required type="text" ng-model="vm.orderStatus.interestRate" ng-minlength="2" ng-maxlength="30">
                     <span ng-if="(orderStatusForm.title.$dirty || vm.isSubmitted)  && orderStatusForm.title.$error.required"><i><b>Interest Rate</b></i> is required.</span>
                     <span ng-if="(orderStatusForm.title.$dirty || vm.isSubmitted)  && orderStatusForm.title.$error.minlength"><i><b>Interest Rate</b></i> should be at least 2 characters long.</span>
                     <span ng-if="(orderStatusForm.title.$dirty || vm.isSubmitted)  && orderStatusForm.title.$error.maxlength"><i><b>Interest Rate</b></i> should not be more than 30 characters long.</span>
 
                 </div>
 
-                <div class="form-box">
-                    <label><em id="mandatory" style="color:Red">*</em>Other Charges</label>
-                    <input class="Interest-rate-input" id="username" name="title" required type="text" ng-model="vm.orderStatus.otherCharges" ng-minlength="2"
-                        ng-maxlength="30">
-                    <select class="loan-option-percent-drop-down" ng-init="vm.frequency2 = 'today'" ng-model="vm.frequency2">
-                            <option value="today">Percentage</option>
-                            <option value="week">Number</option>
-                    </select>
-                    <span ng-if="(orderStatusForm.title.$dirty || vm.isSubmitted)  && orderStatusForm.title.$error.required"><i><b>Other Charges</b></i> is required.</span>
-                    <span ng-if="(orderStatusForm.title.$dirty || vm.isSubmitted)  && orderStatusForm.title.$error.minlength"><i><b>Other Charges</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(orderStatusForm.title.$dirty || vm.isSubmitted)  && orderStatusForm.title.$error.maxlength"><i><b>Other Charges</b></i> should not be more than 30 characters long.</span>
+                <div class="form-box" style="margin-bottom: 10px;">
+                    <label>Include Charges</label>
+                    <input ng-init="vm.orderStatus.includeCharges = true" ng-model="vm.orderStatus.includeCharges" class="billing-addres-checkbox clothcheck" type="checkbox">
 
+                </div>
+
+                <div ng-if="vm.orderStatus.includeCharges">
+                    <div class="form-box">
+                        <label><em id="mandatory" style="color:Red">*</em>Ins. & Other</label>
+                        <input id="insOther" name="insOther" required type="number" ng-model="vm.orderStatus.insOther" ng-minlength="2" ng-maxlength="30">
+                        <span ng-if="(orderStatusForm.insOther.$dirty || vm.isSubmitted)  && orderStatusForm.insOther.$error.required"><i><b>Other Charges</b></i> is required.</span>
+                        <span ng-if="(orderStatusForm.insOther.$dirty || vm.isSubmitted)  && orderStatusForm.insOther.$error.minlength"><i><b>Other Charges</b></i> should be at least 2 characters long.</span>
+                        <span ng-if="(orderStatusForm.insOther.$dirty || vm.isSubmitted)  && orderStatusForm.insOther.$error.maxlength"><i><b>Other Charges</b></i> should not be more than 30 characters long.</span>
+
+                    </div>
+
+                    <div class="form-box">
+                        <label><em id="mandatory" style="color:Red">*</em>Processing Charge</label>
+                        <input id="processingCharge" name="processingCharge" required type="number" ng-model="vm.orderStatus.processingCharge" ng-minlength="2" ng-maxlength="30">
+                        <span ng-if="(orderStatusForm.processingCharge.$dirty || vm.isSubmitted)  && orderStatusForm.processingCharge.$error.required"><i><b>Other Charges</b></i> is required.</span>
+                        <span ng-if="(orderStatusForm.processingCharge.$dirty || vm.isSubmitted)  && orderStatusForm.processingCharge.$error.minlength"><i><b>Other Charges</b></i> should be at least 2 characters long.</span>
+                        <span ng-if="(orderStatusForm.processingCharge.$dirty || vm.isSubmitted)  && orderStatusForm.processingCharge.$error.maxlength"><i><b>Other Charges</b></i> should not be more than 30 characters long.</span>
+
+                    </div>
                 </div>
 
                 <div class="form-box">

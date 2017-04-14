@@ -1,6 +1,6 @@
 ﻿var models = require('../models');
-var Loan = models.Loan;
 var Installment = models.Installment;
+var Loan = models.Loan;
 var Customer = models.Customer;
 var OrderStatus = models.OrderStatus;
 var User = models.User;
@@ -20,10 +20,10 @@ var getErrorMessage = function (err) {
 }
 
 //getting List of 
-//For Geting list of Loans
+//For Geting list of Installments
 exports.list = function (req, res) {
-    req.options.include = [Customer, OrderStatus];
-    Loan.findAndCountAll(req.options).then(function (arrs) {
+    // req.options.include = [Customer,OrderStatus];
+    Installment.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
         res.json(arrs.rows);
     }).catch(function (err) {
@@ -33,15 +33,15 @@ exports.list = function (req, res) {
 }
 
 exports.read = function (req, res) {
-    res.json(req.loan);
+    res.json(req.installment);
 }
 
-exports.getById = function (req, res, next) {
-    Loan.findOne({
-        where: { id: req.params.loanId },
-        include: [Customer]
+exports.getById = function (req,res,next) {
+    Installment.findAll({
+        where: { LoanId: req.params.installmentId},//attributes: ["fullName", "email", "id"]
+        include: [{ model: Loan, include: [Customer]}]
     }).then(function (obj) {
-        req.loan = obj;
+        req.installment = obj;
         next();
     }).catch(function (err) {
         res.status(400).send({ message: getErrorMessage(err) });
@@ -49,27 +49,13 @@ exports.getById = function (req, res, next) {
 }
 
 exports.create = function (req, res) {
-    var start = new Date();
-
-    Loan.create(req.body).then(function (obj) {
+    Installment.create(req.body).then(function (obj) {
         if (!obj) {
             return res.send({ message: "Error Occured while updataing" });
         }
         var objData = obj.get({
             plain: true
         });
-        for (var index = 1; index <= req.body.loanTenure; index++) {
-
-            var objTemp = { installmentNumber: index, installmentAmount: req.body.installmentAmount, dueDate: start, LoanId: obj.dataValues.id };
-
-            Installment.create(objTemp).then(function (obj) {
-                var newDate = start.setDate(start.getDate() + 1);
-                start = new Date(newDate);
-            }).catch(function (error) {
-                console.log('error');
-            });
-
-        }
         res.json(objData);
     }).catch(function (error) {
         res.status(400).status(500).send({ message: getErrorMessage(error) });
@@ -77,19 +63,19 @@ exports.create = function (req, res) {
 }
 
 exports.update = function (req, res) {
-    // var loan = req.loan;
+    // var installment = req.installment;
     // _.forEach(req.body, function (val, key) {
-    //     loan.dataValues[key] = val;
+    //     installment.dataValues[key] = val;
     // });
-    Loan.update(req.loan, {
-        where: {
-            id: req.params.loanId
-        }
-    })
-        .then(function (obj) {
-            return res.json(obj);
-        }).catch(function (error) {
-            return res.status(400).send({ message: getErrorMessage(error) });
-        });
+    Installment.update(req.body, {
+            where: {
+                id: req.params.installmentId
+            }
+        })
+     .then(function (obj) {
+         return res.json(obj);
+    }).catch(function (error) {
+        return res.status(400).send({ message: getErrorMessage(error) });
+    });
 
 }

@@ -75,7 +75,8 @@
             $state.go('secure.edit-loan', { customerId: obj.id });
         }
         function loanDetail(obj) {
-            $state.go('secure.loan-detail', { customerId: obj.id });
+            console.log(obj);
+            $state.go('secure.loan-detail', { id: obj.id });
         }
 
         function save(form) {

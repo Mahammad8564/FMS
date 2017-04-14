@@ -1,38 +1,36 @@
-﻿<div class="inner-heading-bar">Customer's Order Details</div>
+﻿<div class="inner-heading-bar">Loan Id #{{vm.headerId}}</div>
 <div class="main-contant-part" ng-init="vm.getCustomerByLoan()">
     <!-- Customer Details page Section Start Here -->
     <div class="customer-detail-page-contant">
-        <div class="right-add-new-button right-add-new-button-mobile"><a ui-sref="secure.customer">Back</a></div>
+        <div class="right-add-new-button right-add-new-button-mobile"><a ui-sref="secure.loan">Back</a></div>
         <div class="details-table">
             <h2 class="no-record-found-text" ng-if="vm.list.length">No record found</h2>
 
             <table class="table-part" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #c8c8c8 !important;">
                 <tbody>
                     <tr>
-                        <td class="table-loan-page">Name</td>
-                        <td class="table-loan-page2">{{vm.customerDetails.Customer.name}}</td>
+                        <td class="table-loan-page"><b>Name</b></td>
+                        <td class="table-loan-page2">{{vm.customerDetail.name}}</td>
                     </tr>
                     <tr>
-                        <td class="table-loan-page">Mobile Number</td>
-                        <td class="table-loan-page2">{{vm.customerDetails.Customer.mobile}}</td>
+                        <td class="table-loan-page"><b>Mobile Number</b></td>
+                        <td class="table-loan-page2">{{vm.customerDetail.mobile}}</td>
                     </tr>
                     <tr>
-                        <td class="table-loan-page">Reference Mobile</td>
-                        <td class="table-loan-page2">{{vm.customerDetails.Customer.phone}}</td>
+                        <td class="table-loan-page"><b>Reference Mobile</b></td>
+                        <td class="table-loan-page2">{{vm.customerDetail.phone}}</td>
                     </tr>
                     <tr>
-                        <td class="table-loan-page">Address</td>
-                        <td class="table-loan-page2">{{vm.customerDetails.Customer.address}}</td>
+                        <td class="table-loan-page"><b>Address</b></td>
+                        <td class="table-loan-page2">{{vm.customerDetail.address}}</td>
                     </tr>
                     <tr>
-                        <td class="table-loan-page">Agent</td>
-                        <td class="table-loan-page2">
-                            <select>
-                            <option>--Select Agent--</option>
-                            <option>dasdasd</option>
-                            <option>dasdasd</option>
-                            <option>dasdasd</option>
-                        </select>
+                        <td class="table-loan-page"><b>Agent</b></td>
+                        <td class="table-loan-page2" ng-init="vm.getAgentList()">
+                            <select placeholder="Select Agent" name="AgentId" ng-model="vm.customerDetail.AgentId"
+                                ng-change="vm.selectAgent(vm.customerDetail.AgentId)" ng-disabled="vm.customerDetail.AgentId">
+                                <option ng-value="{{os.id}}" ng-repeat="os in vm.agents | filter : {isActive : true}">{{os.name}}</option>
+                            </select>
                         </td>
                     </tr>
                 </tbody>
@@ -46,33 +44,15 @@
                     <th>Actual Payment Date</th>
                     <th class="paid-status-width">Status</th>
                 </tr>
-                <tr>
-                    <td data-th="Installment No.: " class="top-purpal-color-row2">1</td>
-                    <td data-th="Installment Amount: " class="top-purpal-color-row2">1000</td>
-                    <td data-th="Payment Due Date: " class="top-purpal-color-row2">06/04/2017</td>
-                    <td data-th="Actual Payment Date: " class="top-purpal-color-row2">20/04/2017</td>
-                    <td data-th="Status: " class="top-purpal-color-row2"><a href="" class="paid-btn-link">Paid</a><a href="" class="unpaid-btn-link">Unpaid</a></td>
-                </tr>
-                <tr>
-                    <td data-th="Installment No.: " class="top-purpal-color-row2">2</td>
-                    <td data-th="Installment Amount: " class="top-purpal-color-row2">1000</td>
-                    <td data-th="Payment Due Date: " class="top-purpal-color-row2">06/04/2017</td>
-                    <td data-th="Actual Payment Date: " class="top-purpal-color-row2">20/04/2017</td>
-                    <td data-th="Status: " class="top-purpal-color-row2">Paid</td>
-                </tr>
-                <tr>
-                    <td data-th="Installment No.: " class="top-purpal-color-row2">3</td>
-                    <td data-th="Installment Amount: " class="top-purpal-color-row2">1000</td>
-                    <td data-th="Payment Due Date: " class="top-purpal-color-row2">06/04/2017</td>
-                    <td data-th="Actual Payment Date: " class="top-purpal-color-row2">20/04/2017</td>
-                    <td data-th="Status: " class="top-purpal-color-row2">Paid</td>
-                </tr>
-                <tr>
-                    <td data-th="Installment No.: " class="top-purpal-color-row2">4</td>
-                    <td data-th="Installment Amount: " class="top-purpal-color-row2">1000</td>
-                    <td data-th="Payment Due Date: " class="top-purpal-color-row2">06/04/2017</td>
-                    <td data-th="Actual Payment Date: " class="top-purpal-color-row2">20/04/2017</td>
-                    <td data-th="Status: " class="top-purpal-color-row2">Paid</td>
+                <tr ng-repeat="obj in vm.loanDetail">
+                    <td data-th="Installment No.: " class="top-purpal-color-row2">{{obj.installmentNumber}}</td>
+                    <td data-th="Installment Amount: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
+                    <td data-th="Payment Due Date: " class="top-purpal-color-row2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>
+                    <td data-th="Actual Payment Date: " class="top-purpal-color-row2">{{obj.paymentDate | date: 'dd/MM/yyyy'}}</td>
+                    <td data-th="Status: " class="top-purpal-color-row2">
+                        <button ng-disabled="obj.status == 1" ng-class="{{obj.status}} == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)">Paid</button>
+                        <button ng-if="obj.status != 1" ng-class="{{obj.status}} == 0 ? 'paid-btn-link' : 'unpaid-btn-link'">Unpaid</button>
+                    </td>
                 </tr>
             </table>
         </div>

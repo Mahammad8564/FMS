@@ -10,12 +10,21 @@ module.exports = function (sequelize, DataTypes) {
             },
         },
         interestRate: {
-            type: DataTypes.STRING,
+            type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        otherCharges: {
-            type: DataTypes.STRING,
+        insOther: {
+            type: DataTypes.DECIMAL,
             allowNull: false,
+        },
+        processingCharge: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+        },
+        includeCharges: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         },
         isActive: {
             type: DataTypes.BOOLEAN,

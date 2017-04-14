@@ -103,42 +103,43 @@
                     <span ng-if="(loanForm.gender.$dirty || vm.isSubmitted) && loanForm.gender.$error.required"><i><b>Loan Type</b></i> is required.</span>
                 </div>
 
-                <div class="form-box">
+                <!--<div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Loan Amount</label>
                     <input ng-model="vm.loan.loanAmount" name="loanAmount" required type="number">
                     <span ng-if="(loanForm.loanAmount.$dirty || vm.isSubmitted) && loanForm.loanAmount.$error.required"><i><b>Loan Amount</b></i> is required.</span>
-                </div>
+                </div>-->
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Loan Tenure</label>
                     <input class="Interest-rate-input" name="loanTenure" required type="number" ng-model="vm.loan.loanTenure">
-                    <select class="loan-option-percent-drop-down" ng-init="vm.loan.loanTenureOption = 'day'" ng-model="vm.loan.loanTenureOption">
-                            <option value="day">Days</option>
-                            <option value="week">Weeks</option>
-                            <option value="month">Months</option>
+                    <select class="loan-option-percent-drop-down" ng-model="vm.loanTenureOption">
+                            <option ng-value="1">Day(s)</option>
+                            <option ng-value="2">Week(s)</option>
+                            <option ng-value="3">Month(s)</option>
+                            <option ng-value="4">Year(s)</option>
                     </select>
                     <span ng-if="(orderStatusForm.loanTenure.$dirty || vm.isSubmitted)  && orderStatusForm.loanTenure.$error.required"><i><b>Loan Tenure</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Disbursement Amount</label>
-                    <input ng-model="vm.loan.disbursementAmount" name="disbursementAmount" required type="number">
+                    <input ng-model="vm.loan.disbursementAmount" name="disbursementAmount" required type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)">
                     <span ng-if="(loanForm.disbursementAmount.$dirty || vm.isSubmitted) && loanForm.disbursementAmount.$error.required"><i><b>Disbursement Amount</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
-                    <label>Interest Rate</label>
-                    <input ng-model="vm.interestRate" name="interestRate" type="number" disabled>
+                    <label>Ins. & Other</label>
+                    <input ng-model="vm.loan.insOther" name="insOther" type="number">
                 </div>
 
                 <div class="form-box">
-                    <label>Other Cahrges</label>
-                    <input ng-model="vm.otherCharges" name="otherCharges" type="number" disabled>
+                    <label>Processing Charge</label>
+                    <input ng-model="vm.loan.processingCharge" name="processingCharge" type="number">
                 </div>
 
                 <div class="form-box">
-                    <label>Total Amount</label>
-                    <input ng-model="vm.loan.totalAmount" name="totalAmount" type="number">
+                    <label>Loan Cash Amount</label>
+                    <input ng-model="vm.loan.loanAmount" name="loanAmount" type="number">
                 </div>
 
             </div>
