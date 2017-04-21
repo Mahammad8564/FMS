@@ -44,7 +44,7 @@
                     <th>Actual Payment Date</th>
                     <th class="paid-status-width">Status</th>
                 </tr>
-                <tr ng-repeat="obj in vm.loanDetail">
+                <tr ng-repeat="obj in vm.loanDetail | orderBy : 'installmentNumber'">
                     <td data-th="Installment No.: " class="top-purpal-color-row2">{{obj.installmentNumber}}</td>
                     <td data-th="Installment Amount: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
                     <td data-th="Payment Due Date: " class="top-purpal-color-row2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>

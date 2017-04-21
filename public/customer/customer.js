@@ -123,6 +123,7 @@
         function getList() {
             Restangular.all('api/customer').getList(vm.options).then(function (res) {
                 vm.list = res.data;
+                console.log(vm.list);
                 vm.options.totalItems = parseInt(res.headers('total'));
             });
         }

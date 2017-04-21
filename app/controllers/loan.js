@@ -62,38 +62,112 @@ exports.create = function (req, res) {
         });
         var start = new Date();
 
-        for (var index = 1; index <= req.body.loanTenure; index++) {
-            var startClone = lodash.cloneDeep(start);
-            var objTemp = { installmentNumber: index, installmentAmount: req.body.installmentAmount, dueDate: startClone, LoanId: obj.dataValues.id };
-            switch (req.body.loanTenureOption) {
-                case 1:
-                    var newDate = start.setDate(start.getDate() + 1);
-                    start = new Date(newDate);
-                    break;
-                case 2:
-                    var newDate = start.setDate(start.getDate() + 7);
-                    start = new Date(newDate);
-                    break;
-                case 3:
-                    var newDate = start.setMonth(start.getMonth() + 1);
-                    start = new Date(newDate);
-                    break;
-                case 4:
-                    var newDate = start.setFullYear(start.getFullYear() + 1);
-                    start = new Date(newDate);
-                    break;
+        switch (req.body.OrderStatusId) {
+            case "1":
+                switch (req.body.loanTenureOption) {
+                    case 1:
+                        newFun2(1,1);
+                        break;
+                    case 2:
+                        newFun2(7,1);
+                        break;
+                    case 3:
+                        newFun2(30,1);
+                        break;
+                    case 4:
+                        newFun2(365,1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "2":
+                switch (req.body.loanTenureOption) {
+                    case 1:
+                        newFun(7,7);
+                        break;
+                    case 2:
+                        newFun(1,7);
+                        break;
+                    case 3:
+                        newFun2(4,7);
+                        break;
+                    case 4:
+                        newFun2(52,7);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "3":
+                switch (req.body.loanTenureOption) {
+                    case 1:
+                        newFun(15,15);
+                        break;
+                    case 2:
+                        newFun(2,15);
+                        break;
+                    case 3:
+                        newFun2(2,15);
+                        break;
+                    case 4:
+                        newFun2(24,15);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "4":
+                switch (req.body.loanTenureOption) {
+                    case 1:
+                        newFun(30,30);
+                        break;
+                    case 2:
+                        newFun(4,30);
+                        break;
+                    case 3:
+                        newFun2(1,30);
+                        break;
+                    case 4:
+                        newFun2(12,30);
+                        break;
+                    default:
+                        break;
+                }
+                break;
 
-                default:
-                    break;
-            }
-
-
-            Installment.create(objTemp).then(function (obj) {
-            }).catch(function (error) {
-                console.log('error');
-            });
-
+            default:
+                break;
         }
+        function newFun(opt1,opt2) {
+            for (var index = 1; index <= req.body.loanTenure / opt1; index++) {
+                var startClone = lodash.cloneDeep(start);
+                var objTemp = { installmentNumber: index, installmentAmount: req.body.installmentAmount, dueDate: startClone, LoanId: obj.dataValues.id };
+
+                var newDate = start.setDate(start.getDate() + opt2);
+                start = new Date(newDate);
+
+                Installment.create(objTemp).then(function (obj) {
+                }).catch(function (error) {
+                    console.log('error');
+                });
+            }
+        }
+        function newFun2(opt1,opt2) {
+            for (var index = 1; index <= req.body.loanTenure * opt1; index++) {
+                var startClone = lodash.cloneDeep(start);
+                var objTemp = { installmentNumber: index, installmentAmount: req.body.installmentAmount, dueDate: startClone, LoanId: obj.dataValues.id };
+
+                var newDate = start.setDate(start.getDate() + opt2);
+                start = new Date(newDate);
+
+                Installment.create(objTemp).then(function (obj) {
+                }).catch(function (error) {
+                    console.log('error');
+                });
+            }
+        }
+
         res.json(objData);
     }).catch(function (error) {
         res.status(400).status(500).send({ message: getErrorMessage(error) });

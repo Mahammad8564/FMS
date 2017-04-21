@@ -45,7 +45,7 @@
 
         function changeLoanType() {
             Restangular.one('api/orderStatus/' + vm.loanTypeId).get().then(function (res) {
-                vm.interestRate = res.data.interestRate;
+                vm.interestRate = res.data.interestRate/1200;
                 if (res.data.includeCharges == 1) {
                     vm.includeCharges = true;
                     vm.insOther = res.data.insOther;
@@ -60,7 +60,7 @@
                 vm.loan.processingCharge = Math.round((disbursementAmount * vm.processingCharge) / 10000);
                 vm.loan.loanAmount = disbursementAmount - vm.loan.insOther - vm.loan.processingCharge;
             }
-            else{
+            else {
                 // vm.loan.insOther = Math.round((disbursementAmount * vm.insOther) / 10000);
                 // vm.loan.processingCharge = Math.round((disbursementAmount * vm.processingCharge) / 10000);
                 vm.loan.loanAmount = disbursementAmount - vm.loan.insOther - vm.loan.processingCharge;
@@ -84,16 +84,16 @@
             }
             switch (vm.loanTenureOption) {
                 case 1:
-                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * (vm.interestRate/1200) * Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure/30)))/(Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure/30))-1));
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), (vm.loan.loanTenure / 30))) / (Math.pow((1 + vm.interestRate), (vm.loan.loanTenure / 30)) - 1));
                     break;
                 case 2:
-                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * (vm.interestRate/1200) * Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure/4)))/(Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure/4))-1));
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), (vm.loan.loanTenure / 4))) / (Math.pow((1 + vm.interestRate), (vm.loan.loanTenure / 4)) - 1));
                     break;
                 case 3:
-                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * (vm.interestRate/1200) * Math.pow((1+(vm.interestRate/1200)),vm.loan.loanTenure))/(Math.pow((1+(vm.interestRate/1200)),vm.loan.loanTenure)-1));
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), vm.loan.loanTenure)) / (Math.pow((1 + vm.interestRate), vm.loan.loanTenure) - 1));
                     break;
                 case 4:
-                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * (vm.interestRate/1200) * Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure*12)))/(Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure*12))-1));
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), (vm.loan.loanTenure * 12))) / (Math.pow((1 + vm.interestRate), (vm.loan.loanTenure * 12)) - 1));
                     break;
 
                 default:
@@ -173,7 +173,6 @@
 
         function selectAgent(id) {
             Restangular.one('api/customer/' + vm.customerDetail.id).patch({ AgentId: id }).then(function (res) {
-                console.log(res);
             }, function (err) {
                 console.log(err);
             });
@@ -209,6 +208,10 @@
         function getCustomerByLoan() {
             vm.headerId = $stateParams.id;
             Restangular.one('api/installment/' + $stateParams.id).get().then(function (res) {
+                
+                var groupedByMonth = _.groupBy(res.data, function (item) {
+                    return item.dueDate.substring(0, 7);
+                });
                 vm.loanDetail = res.data;
                 vm.customerDetail = res.data[0].Loan.Customer;
                 vm.allPaid = true;
@@ -219,7 +222,6 @@
                 }, this);
                 if (vm.allPaid) {
                     Restangular.one('api/loan/' + $stateParams.id).patch({ status: 'paid' }).then(function (res) {
-                        console.log(res);
                     }, function (err) {
                         console.log(err);
                     });
