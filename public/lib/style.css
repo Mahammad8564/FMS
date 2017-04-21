@@ -27,7 +27,8 @@ input {
 #border-bottom-table{ border-top:1px solid #ccc !important;}
 .border-bottom-table-0px{ border:0px !important;}
 .bottom-address-bx{width:100%; display:inline-block;box-sizing: border-box;padding:10px 15px; margin-top:15px; margin-bottom:15px;}
-
+.choose-a-image-btn{float: left; margin-top: 3px;}
+.choose-a-image-btn-text-rt{float: left; margin-top: 5px; margin-left: 4px; font-style: normal;}
 .noti-date-text{width:100%; display: inline-block; border-bottom: 1px solid #ccc; padding: 0 0; margin: 0px 0 12px 0;}
 .noti-date-text input{width:40%;margin-bottom: 16px; float: left; border: 1px solid #ccc; border-radius: 4px; background: #fff; padding: 7px; font-size: 15px; color: #333;}
 .notification-main-bx{width:600px; margin: 0 auto; display: table; background:#fff;padding: 30px;}
@@ -63,7 +64,7 @@ input {
 
 .Interest-rate-input{
         margin-right: 10px;
-    width: 48% !important; 
+    width: 46% !important; 
 }
 
 .table-loan-page{border-right: 1px solid #c8c8c8;border-bottom: 1px solid #c8c8c8;width:210px;}
@@ -74,7 +75,7 @@ input {
 .unpaid-btn-link{width:60px; float: left; text-decoration: none !important; background: #e7e7e7;color: #000 !important;border-radius: 0px 3px 3px 0px; padding: 4px 10px; text-align: center;}
 .unpaid-btn-link:hover{ background: #f0f0f0;}
 .unpaid-btn-link-active{width:60px; float: left; text-decoration: none !important; background: #016364;color: #fff !important; border-radius: 0px 3px 3px 0px; padding: 4px 10px; text-align: center;}
-.loan-option-percent-drop-down{width: 20% !important;}
+.loan-option-percent-drop-down{width: 22% !important;}
 
 
 .stats-container .circle {
@@ -546,8 +547,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
 .order-form-right-address-section .form-address-heading-rt img{float: right;}
 .order-form-right-address-section p{line-height: 25px;text-align: left;}
 .form-box span {color: #da2d2d;margin-left: -2px;float: left;padding-bottom: 10px;margin-left: 30%; margin-top: -10px;}
-.form-section-box{width:100%; display: inline-block; margin-bottom:26px;}
-.form-heading{width:100%; border-bottom: 1px solid #2e2e2e; padding: 0 0 0 0; margin: 0px 0 30px 0; font-size: 18px; color: #2e2e2e;}
+.form-section-box{width:100%; display: inline-block; margin-bottom:0px;}
+.form-heading{width:100%; border-bottom: 1px solid #2e2e2e; padding: 0 0 0 0; margin: 0px 0 25px 0; font-size: 18px; color: #2e2e2e;}
 .form-subHeading{font-weight: 600;font-size: large; padding-top: 20px;}
 .form-section-box label{width:28%; float: left; font-size: 15px; padding: 0 0 0 0; margin: 8px 2% 0 0; text-align: left; color: #202020; font-weight: 600;}
 .form-section-box input{
@@ -653,7 +654,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
 .form-box{width:100%; display: inline-block;position: relative;}
 
 .text-head-align {    
-    /*width: 28% !important;*/
+    width: 24.5% !important;
     text-align: left !important;
     font-weight: 400 !important;}
 
@@ -773,12 +774,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
   float: none;
   background: #f5f5f5;
   border-radius: 4px;
-  padding: 30px;
+  padding: 30px 30px 10px 30px;
   border: 1px solid #ccc;
   display: table;
   margin-top: 20px;
 }
-.add-new-btm-btn{float: left; margin-left: 30%;}
+.add-new-btm-btn{float: left; margin-left: 30%;margin-top: 15px;}
 .billing-addres-checkbox{
   float: left;
   margin-right: 20px;
@@ -1165,12 +1166,15 @@ text-align: center;
 .table-tr-alternate-color {
     background: #f2f2f2;
 }
-
+.new-customer-radio-btm-mar{margin-bottom: 15px;}
+.home-icons-box{width:100%; float: left;}
 
 
 /*Media query 1024 to 1170 css start here*/
 
 @media only screen and (min-width: 1024px) and (max-width: 1170px) {
+    .text-head-align {width: 27% !important;}
+    .form-box span{margin-left: 33%;}
     .order-summary-box .summary-bx-2 .orderdate-bx select{width: 62%;}
   .addproducttable-main-box table {width:198px !important;}
   .main-contant-part {padding:20px;min-height:600px;}
@@ -1201,9 +1205,17 @@ text-align: center;
   .form-section-box input{width: 67%;}
   .form-section-box select{width: 67%;}
   .form-section-box textarea{width: 67%;}
-  .Interest-rate-input {width: 44% !important;}
+  .Interest-rate-input {width: 40% !important;}
   .register-btm-btn-box-left-mar {margin-left: 25% !important;}
   .register-submit-btn{width: 85% !important;}
+  .submit-button input {width:85% !important;}
+  .submit-button{width:100px;}
+  .loan-option-percent-drop-down {
+        width: 24% !important;
+        padding: 0px 6px 0px 7px !important;
+        line-height: 34px;
+        height: 34px;
+    }
 
 }
 /*Media query 1024 to 1170 css end here*/
@@ -1211,8 +1223,15 @@ text-align: center;
 /*Media query 768 to 1023 css start here*/
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-    .loan-option-percent-drop-down {width: 20% !important; padding: 8px 12px 9px 8px !important;}
-    .Interest-rate-input {width: 44% !important;}
+    .text-head-align {width: 27% !important;}
+    .form-box span{margin-left: 33%;}
+    .loan-option-percent-drop-down {
+        width: 24% !important;
+        padding: 0px 6px 0px 7px !important;
+        line-height: 38px;
+        height: 38px;
+    }
+    .Interest-rate-input {width: 40% !important;}
     .register-btm-btn-box-left-mar {margin-left: 25% !important;}
     .register-submit-btn{width: 100% !important;}
     .submit-button{width: 85px;}
@@ -1226,7 +1245,7 @@ text-align: center;
     .order-summary-box .summary-bx-1 .orderstatus-bx label {width: 24%;}
     .edit-order-amount-th-width {width: 13% !important;}
     .form-section-box input{padding: 8px 9px 8px 9px;}
-    .submit-button input {width: 130px;}
+    .submit-button input {width:100% !important;}
 	.form-section-box .Edit-Design-Measurement {width: 54% !important;}
 	.form-box-measurement-add{width:70% !important;}
 	.register-btm-btn-box-left-mar {margin-left: 25% !important;}
@@ -1264,7 +1283,7 @@ text-align: center;
   .navbar ul li a{padding: 0 20px 0 20px;font-size: 14px;}
   .main-contant-part p{font-size: 15px;}
   .contant-three-box-bottom .box p{font-size: 15px;}
-  .inner-heading-bar{float: left; padding-left: 15px;line-height:50px;}
+  .inner-heading-bar{float: left; padding-left: 15px;line-height:45px;font-size: 22px;}
   .paid-status-width {width: 18% !important;}
   .table-part tr td{padding: 5px 6px 5px 10px;}
   .paid-btn-link {width: 55px;}
@@ -1279,8 +1298,9 @@ text-align: center;
 /*Media query 320 to 767 css start here*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+    .new-customer-radio-btm-mar {margin-bottom: 5px;}
     .loan-option-percent-drop-down {width: 47% !important;}
-    .form-box .text-head-align{width: 90% !important;}
+    .form-box .text-head-align{width:88% !important;}
     .form-box-lable-right-input .text-head-align{width:90% !important;}
     .paid-btn-link{padding: 2px 10px;}
     .unpaid-btn-link{padding: 2px 10px;}
@@ -1351,14 +1371,14 @@ text-align: center;
 .outside2 {margin-left: 0px;width: 55%;}
 .customer-search-box-main {width: 66%;}
 .serchInput {width: 93%;}
-.right-add-new-button a {width:86px;}
+.right-add-new-button a {width:86px;padding: 8px 5px;font-size: 15px;}
 .managecustomer-left-menu-inner-page {width: 100%;margin-bottom: 20px;}
 .managecustomer-right-bx {width: 100%; margin-left: 0px;}
 .inner-heading-bar{padding: 0 0 0 20px;}
 .inner-heading-bar{line-height: 45px;font-size: 22px;}
-.add-new-form{width: 90% !important;padding: 15px;}
+.add-new-form{width:100% !important;padding: 15px; margin-top: 0px;}
 .form-section-box .birthdate {width: 30% !important;}
-.add-new-btm-btn{margin-left: 0px;}
+.add-new-btm-btn{margin-left: 0px;margin-top: 15px;}
 .order-form-left-section {width: 100%;}
 .form-heading{margin: 0px 0 20px 0;}
 .form-section-box label{width: 100%;text-align: left;}
