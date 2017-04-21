@@ -66,8 +66,8 @@ exports.getById = function (req, res, next) {
 } 
 
 exports.create = function (req, res) {
-    req.body.createdById = req.user.id;
-    if (req.files.length > 0) {
+    // req.body.createdById = req.user.id;
+    if (req.files && req.files.length > 0) {
         req.body.customer.image1 = req.files[0].filename;
         req.body.customer.image2 = req.files[1].filename;
         req.body.customer.image3 = req.files[2].filename;

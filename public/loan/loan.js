@@ -35,11 +35,12 @@
         vm.selectAgent = selectAgent
         vm.hideBasicDetails = true;
         vm.includeCharges = false;
+
         vm.loanTenureOption = 1;
 
-        if ($stateParams.customerId != null) {
+        if ($stateParams.id != 'new') {
             vm.hideBasicDetails = false;
-            vm.CustomerId = $stateParams.customerId;
+            vm.CustomerId = $stateParams.id;
         }
 
         function changeLoanType() {
@@ -57,6 +58,11 @@
             if (vm.includeCharges) {
                 vm.loan.insOther = Math.round((disbursementAmount * vm.insOther) / 10000);
                 vm.loan.processingCharge = Math.round((disbursementAmount * vm.processingCharge) / 10000);
+                vm.loan.loanAmount = disbursementAmount - vm.loan.insOther - vm.loan.processingCharge;
+            }
+            else{
+                // vm.loan.insOther = Math.round((disbursementAmount * vm.insOther) / 10000);
+                // vm.loan.processingCharge = Math.round((disbursementAmount * vm.processingCharge) / 10000);
                 vm.loan.loanAmount = disbursementAmount - vm.loan.insOther - vm.loan.processingCharge;
             }
         }
@@ -78,16 +84,16 @@
             }
             switch (vm.loanTenureOption) {
                 case 1:
-                    vm.loan.installmentAmount = Math.round((((vm.loan.disbursementAmount * vm.interestRate * vm.loan.loanTenure) / (100 * 365)) + vm.loan.disbursementAmount) / vm.loan.loanTenure);
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * (vm.interestRate/1200) * Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure/30)))/(Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure/30))-1));
                     break;
                 case 2:
-                    vm.loan.installmentAmount = Math.round((((vm.loan.disbursementAmount * vm.interestRate * vm.loan.loanTenure) / (100 * 52)) + vm.loan.disbursementAmount) / vm.loan.loanTenure);
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * (vm.interestRate/1200) * Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure/4)))/(Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure/4))-1));
                     break;
                 case 3:
-                    vm.loan.installmentAmount = Math.round((((vm.loan.disbursementAmount * vm.interestRate * vm.loan.loanTenure) / (100 * 12)) + vm.loan.disbursementAmount) / vm.loan.loanTenure);
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * (vm.interestRate/1200) * Math.pow((1+(vm.interestRate/1200)),vm.loan.loanTenure))/(Math.pow((1+(vm.interestRate/1200)),vm.loan.loanTenure)-1));
                     break;
                 case 4:
-                    vm.loan.installmentAmount = Math.round((((vm.loan.disbursementAmount * vm.interestRate * vm.loan.loanTenure) / 100) + vm.loan.disbursementAmount) / vm.loan.loanTenure);
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * (vm.interestRate/1200) * Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure*12)))/(Math.pow((1+(vm.interestRate/1200)),(vm.loan.loanTenure*12))-1));
                     break;
 
                 default:
@@ -100,8 +106,6 @@
             vm.loan.loanTenureOption = vm.loanTenureOption;
             if (vm.customer) {
                 Restangular.all('api/customer').post({ customer: vm.customer }).then(function (res) {
-                    // SweetAlert.swal("customer saved successfully!");
-                    // $state.go('secure.loan');
                     vm.loan.CustomerId = res.data.id;
                     Restangular.all('api/loan').post(vm.loan).then(function (res) {
                         SweetAlert.swal("loan saved successfully!");
@@ -122,7 +126,6 @@
             else if (!vm.loan.id) {
                 vm.loan.CustomerId = vm.CustomerId;
                 Restangular.all('api/loan').post(vm.loan).then(function (res) {
-                    console.log(res);
                     SweetAlert.swal("loan saved successfully!");
                     $state.go('secure.loan');
                 }, function (err) {
@@ -169,7 +172,7 @@
         }
 
         function selectAgent(id) {
-            Restangular.one('api/customer/' + vm.customerDetail.id).patch({AgentId:id}).then(function (res) {
+            Restangular.one('api/customer/' + vm.customerDetail.id).patch({ AgentId: id }).then(function (res) {
                 console.log(res);
             }, function (err) {
                 console.log(err);
@@ -197,8 +200,6 @@
         function activate() {
             if ($stateParams.id != 'new') {
                 Restangular.one('api/loan/' + $stateParams.id).get().then(function (res) {
-                    if (res.data) { vm.hideBasicDetails = false; }
-
                     vm.loan = res.data;
                     vm.loan.date = new Date(vm.loan.date);
                 });
@@ -210,17 +211,30 @@
             Restangular.one('api/installment/' + $stateParams.id).get().then(function (res) {
                 vm.loanDetail = res.data;
                 vm.customerDetail = res.data[0].Loan.Customer;
+                vm.allPaid = true;
+                res.data.forEach(function (element) {
+                    if (element.status == 0) {
+                        vm.allPaid = false;
+                    }
+                }, this);
+                if (vm.allPaid) {
+                    Restangular.one('api/loan/' + $stateParams.id).patch({ status: 'paid' }).then(function (res) {
+                        console.log(res);
+                    }, function (err) {
+                        console.log(err);
+                    });
+                }
             });
         }
 
-        function paid(index,id) {
-            
-            Restangular.one('api/installment/' + id).patch({status:true,paymentDate:new Date()}).then(function (res) {
+        function paid(index, id) {
+
+            Restangular.one('api/installment/' + id).patch({ status: true, paymentDate: new Date() }).then(function (res) {
                 vm.getCustomerByLoan();
             }, function (err) {
                 console.log(err);
             });
-            
+
         }
 
     }

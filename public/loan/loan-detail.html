@@ -50,8 +50,8 @@
                     <td data-th="Payment Due Date: " class="top-purpal-color-row2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>
                     <td data-th="Actual Payment Date: " class="top-purpal-color-row2">{{obj.paymentDate | date: 'dd/MM/yyyy'}}</td>
                     <td data-th="Status: " class="top-purpal-color-row2">
-                        <button ng-disabled="obj.status == 1" ng-class="{{obj.status}} == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)">Paid</button>
-                        <button ng-if="obj.status != 1" ng-class="{{obj.status}} == 0 ? 'paid-btn-link' : 'unpaid-btn-link'">Unpaid</button>
+                        <button ng-if="obj.status == 1" class="paid-btn-link" disabled>Paid</button>
+                        <button ng-if="obj.status == 0" class="unpaid-btn-link" ng-click="vm.paid($index,obj.id)">Unpaid</button>
                     </td>
                 </tr>
             </table>

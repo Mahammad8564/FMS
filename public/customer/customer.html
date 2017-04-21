@@ -53,7 +53,8 @@
                                <th>Loan Detail</th>
                            </tr>
                            <tr ng-repeat="oi in obj.Loans" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
-                               <td data-th="Design: " class="top-purpal-color-row2"><a href="" ng-click="vm.editLeave(oi)" class="customer-name-link">{{oi.id}}</a></td>
+                               <td data-th="Design: " class="top-purpal-color-row2">{{oi.id}}</td>
+                               <!--<td data-th="Design: " class="top-purpal-color-row2"><a href="" ng-click="vm.editLeave(oi)" class="customer-name-link">{{oi.id}}</a></td>-->
                                <td data-th="Style: " class="top-purpal-color-row2">{{oi.loanAmount}}</td>
                                <td data-th="Delivery Date: " class="top-purpal-color-row2">{{oi.date | date:'dd-MM-yyyy'}}</td>
                                <td data-th="Staus: " class="top-purpal-color-row2">{{oi.installmentAmount}}</td>
