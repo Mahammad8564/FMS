@@ -6,6 +6,7 @@ var OrderStatus = models.OrderStatus;
 var User = models.User;
 var Sequelize = require('sequelize');
 var _ = require('underscore');
+var lodash = require('lodash');
 //get Error Message Consized
 var getErrorMessage = function (err) {
     if (err.errors) {
@@ -49,7 +50,7 @@ exports.getById = function (req, res, next) {
 }
 
 exports.create = function (req, res) {
-    var start = new Date();
+
 
     Loan.create(req.body).then(function (obj) {
         if (!obj) {
@@ -58,13 +59,15 @@ exports.create = function (req, res) {
         var objData = obj.get({
             plain: true
         });
+        var start = new Date();
+
         for (var index = 1; index <= req.body.loanTenure; index++) {
-
-            var objTemp = { installmentNumber: index, installmentAmount: req.body.installmentAmount, dueDate: start, LoanId: obj.dataValues.id };
-
+            var startClone = lodash.cloneDeep(start);
+            var objTemp = { installmentNumber: index, installmentAmount: req.body.installmentAmount, dueDate: startClone, LoanId: obj.dataValues.id };
+            var newDate = start.setDate(start.getDate() + 1);
+            start = new Date(newDate);
+            
             Installment.create(objTemp).then(function (obj) {
-                var newDate = start.setDate(start.getDate() + 1);
-                start = new Date(newDate);
             }).catch(function (error) {
                 console.log('error');
             });

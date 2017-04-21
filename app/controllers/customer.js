@@ -63,17 +63,17 @@ exports.getById = function (req, res, next) {
         console.log(err);
         res.status(400).send({ message: getErrorMessage(err) });
     });
-}
+} 
 
 exports.create = function (req, res) {
     req.body.createdById = req.user.id;
-    if (req.file) {
-        req.body.customer.image1 = req.file1.filename;
-        req.body.customer.image2 = req.file2.filename;
-        req.body.customer.image3 = req.file3.filename;
-        req.body.customer.image4 = req.file4.filename;
-        req.body.customer.image5 = req.file5.filename;
-        req.body.customer.image6 = req.file6.filename;
+    if (req.files.length > 0) {
+        req.body.customer.image1 = req.files[0].filename;
+        req.body.customer.image2 = req.files[1].filename;
+        req.body.customer.image3 = req.files[2].filename;
+        req.body.customer.image4 = req.files[3].filename;
+        req.body.customer.image5 = req.files[4].filename;
+        req.body.customer.image6 = req.files[5].filename;
     }
     if (req.body.customer.id) {
         Customer.update(req.body.customer, {

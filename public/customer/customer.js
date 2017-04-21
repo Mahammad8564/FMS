@@ -5,17 +5,19 @@
 
     angular.module('myra').controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['Authentication', 'Restangular', '$state', 'SweetAlert', '$stateParams', 'Upload'];
+    CustomerController.$inject = ['Authentication', 'Restangular', '$http', '$state', 'SweetAlert', '$stateParams', 'Upload'];
 
-    function CustomerController(Authentication, Restangular, $state, SweetAlert, $stateParams, Upload) {
+    function CustomerController(Authentication, Restangular, $http, $state, SweetAlert, $stateParams, Upload) {
         var vm = this;
         vm.list = [];
+        vm.file = [];
         vm.save = save;
         vm.edit = edit;
         vm.getList = getList;
         vm.search = search;
         vm.order = order;
         vm.activate = activate;
+        vm.download = download;
         vm.pageChange = pageChange;
         vm.editLeave = editLeave;
         vm.loanDetail = loanDetail;
@@ -33,6 +35,19 @@
         vm.displayPhoto4 = displayPhoto4;
         vm.displayPhoto5 = displayPhoto5;
         vm.displayPhoto6 = displayPhoto6;
+
+        function download(filename) {
+            $http.get('http://localhost:3004/' + filename, { responseType: 'blob' })
+                .then(function (results) {
+                    console.log(results);
+                    var data = results.data;
+                    var blob = new Blob(
+                        [data],
+                        { type: "image/*" }
+                    );
+                    saveAs(blob, filename);
+                });
+        }
 
         function displayPhoto1(file) {
             Upload.base64DataUrl(file).then(function (url) {
@@ -94,7 +109,7 @@
             }
             else {
 
-                if (vm.file) {
+                if (vm.file.length > 0) {
                     upload('api/customer');
                 }
                 else {
@@ -134,13 +149,11 @@
         function upload(url) {
             Upload.upload({
                 url: url,
-                data: { file: vm.file1, customer: vm.customer }
+                data: { file: vm.file, customer: vm.customer }
             }).then(function (resp) {
-                console.log(resp);
                 SweetAlert.swal("customer saved successfully!");
                 $state.go('secure.customer');
             }, function (resp) {
-                console.log(resp.data);
                 vm.error = resp.data.message;
                 vm.startProcessing = false;
             }, function (evt) {

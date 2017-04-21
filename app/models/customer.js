@@ -67,7 +67,7 @@ module.exports = function (sequelize, DataTypes) {
                     Customer.belongsTo(models.Agent, {
                         onDelete: "CASCADE",
                         foreignKey: {
-                            allowNull: false
+                            allowNull: true
                         }
                     });
                 }
