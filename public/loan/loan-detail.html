@@ -44,14 +44,14 @@
                     <th>Actual Payment Date</th>
                     <th class="paid-status-width">Status</th>
                 </tr>
-                <tr ng-repeat="obj in vm.loanDetail | orderBy : 'installmentNumber'">
+                <tr ng-repeat="obj in vm.loanDetail | orderBy : 'installmentNumber'" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
                     <td data-th="Installment No.: " class="top-purpal-color-row2">{{obj.installmentNumber}}</td>
                     <td data-th="Installment Amount: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
                     <td data-th="Payment Due Date: " class="top-purpal-color-row2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>
                     <td data-th="Actual Payment Date: " class="top-purpal-color-row2">{{obj.paymentDate | date: 'dd/MM/yyyy'}}</td>
                     <td data-th="Status: " class="top-purpal-color-row2">
-                        <button ng-if="obj.status == 1" class="paid-btn-link" disabled>Paid</button>
-                        <button ng-if="obj.status == 0" class="unpaid-btn-link" ng-click="vm.paid($index,obj.id)">Unpaid</button>
+                        <button ng-class="obj.status == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Paid</button>
+                        <button ng-class="obj.status == 0 ? 'unpaid-btn-link' : 'unpaid-btn-link'" ng-click="vm.unpaid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Unpaid</button>
                     </td>
                 </tr>
             </table>

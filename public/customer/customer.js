@@ -28,6 +28,7 @@
             page: 1,
             search: ''
         }
+        vm.customer = {};
         vm.today = new Date();
         vm.displayPhoto1 = displayPhoto1;
         vm.displayPhoto2 = displayPhoto2;
@@ -39,7 +40,6 @@
         function download(filename) {
             $http.get('http://localhost:3004/' + filename, { responseType: 'blob' })
                 .then(function (results) {
-                    console.log(results);
                     var data = results.data;
                     var blob = new Blob(
                         [data],
@@ -51,32 +51,32 @@
 
         function displayPhoto1(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture1 = file.name;
+                vm.customer.image1 = file.name;
             });
         }
         function displayPhoto2(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture2 = file.name;
+                vm.customer.image2 = file.name;
             });
         }
         function displayPhoto3(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture3 = file.name;
+                vm.customer.image3 = file.name;
             });
         }
         function displayPhoto4(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture4 = file.name;
+                vm.customer.image4 = file.name;
             });
         }
         function displayPhoto5(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture5 = file.name;
+                vm.customer.image5 = file.name;
             });
         }
         function displayPhoto6(file) {
             Upload.base64DataUrl(file).then(function (url) {
-                vm.localPicture6 = file.name;
+                vm.customer.image6 = file.name;
             });
         }
 
@@ -123,8 +123,8 @@
         function getList() {
             Restangular.all('api/customer').getList(vm.options).then(function (res) {
                 vm.list = res.data;
-                console.log(vm.list);
-                vm.options.totalItems = parseInt(res.headers('total'));
+                vm.options.totalItems = res.data.length;
+                // vm.options.totalItems = parseInt(res.headers('total'));
             });
         }
 

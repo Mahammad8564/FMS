@@ -129,17 +129,17 @@
 
                 <div class="form-box">
                     <label>Ins. & Other</label>
-                    <input ng-model="vm.loan.insOther" name="insOther" type="number">
+                    <input ng-model="vm.loan.insOther" name="insOther" type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)">
                 </div>
 
                 <div class="form-box">
                     <label>Processing Charge</label>
-                    <input ng-model="vm.loan.processingCharge" name="processingCharge" type="number">
+                    <input ng-model="vm.loan.processingCharge" name="processingCharge" type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)">
                 </div>
 
                 <div class="form-box">
                     <label>Loan Cash Amount</label>
-                    <input ng-model="vm.loan.loanAmount" name="loanAmount" type="number">
+                    <input ng-model="vm.loan.loanAmount" name="loanAmount" type="number" disabled>
                 </div>
 
             </div>

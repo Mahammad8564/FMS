@@ -11,7 +11,7 @@
                 <tr class="top-purpal-color-row">
                     <th>Loan Id</th>
                     <th>Customer Name</th>
-                    <th>Loan amount</th>
+                    <th>Disbursement amount</th>
                     <th>Loan Type</th>
                     <th>Loan Tenure</th>
                     <th>Installment Amount</th>
@@ -23,7 +23,7 @@
                     <!--<td data-th="Address: " class="top-purpal-color-row2"><a href="" ng-click="vm.edit(obj)" class="customer-name-link">{{obj.id}}</a></td>-->
                     <td data-th="Customer Name: " class="top-purpal-color-row2">{{obj.Customer.name}}</td>
                     <!--<td data-th="Customer Name: " class="top-purpal-color-row2"><a href="" class="customer-name-link">{{obj.Customer.name}}</a></td>-->
-                    <td data-th="Mobile Number: " class="top-purpal-color-row2">{{obj.loanAmount}}</td>
+                    <td data-th="Mobile Number: " class="top-purpal-color-row2">{{obj.disbursementAmount}}</td>
                     <td data-th="Address: " class="top-purpal-color-row2">{{obj.OrderStatus.title}}</td>
                     <td data-th="Address: " class="top-purpal-color-row2">{{obj.loanTenure}}</td>
                     <td data-th="Address: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
@@ -35,7 +35,7 @@
 
         </div>
     </div>
-    <div class="paging" ng-if="vm.list.length > 0">
+    <div class="paging" ng-if="vm.options.totalItems > 10">
         <span class="showing-text-bx">
             Showing {{ ((vm.options.page - 1) * vm.options.pagesize) + 1 }} to
             <t ng-if="(vm.options.page * vm.options.pagesize) > vm.options.totalItems">{{vm.options.totalItems}}</t>

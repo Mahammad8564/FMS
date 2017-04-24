@@ -34,7 +34,7 @@
             </table>
         </div>
     </div>
-    <div class="paging" ng-if="vm.list.length > 0">
+    <div class="paging" ng-if="vm.options.totalItems > 10">
         <span class="showing-text-bx">
             Showing {{ ((vm.options.page - 1) * vm.options.pagesize) + 1 }} to
             <t ng-if="(vm.options.page * vm.options.pagesize) > vm.options.totalItems">{{vm.options.totalItems}}</t>
