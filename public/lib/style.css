@@ -70,9 +70,9 @@ input {
 .table-loan-page{border-right: 1px solid #c8c8c8;border-bottom: 1px solid #c8c8c8;width:210px;}
 .table-loan-page2{border-right: 1px solid #c8c8c8;border-bottom: 1px solid #c8c8c8;}
 .paid-status-width{width: 14% !important;}
-.paid-btn-link{width:60px; float: left; text-decoration: none !important; background: #016364;color: #fff !important; border-radius: 3px 0px 0px 3px; padding: 4px 10px; text-align: center;}
+.paid-btn-link{width:60px; float: left;border: 1px; text-decoration: none !important; background: #016364;color: #fff !important; border-radius: 3px 0px 0px 3px; padding: 4px 10px; text-align: center;}
 .paid-btn-link:hover{ background: #03898a;}
-.unpaid-btn-link{width:60px; float: left; text-decoration: none !important; background: #e7e7e7;color: #000 !important;border-radius: 0px 3px 3px 0px; padding: 4px 10px; text-align: center;}
+.unpaid-btn-link{width:60px; float: left;border: 1px; text-decoration: none !important; background: #e7e7e7;color: #000 !important;border-radius: 0px 3px 3px 0px; padding: 4px 10px; text-align: center;}
 .unpaid-btn-link:hover{ background: #f0f0f0;}
 .unpaid-btn-link-active{width:60px; float: left; text-decoration: none !important; background: #016364;color: #fff !important; border-radius: 0px 3px 3px 0px; padding: 4px 10px; text-align: center;}
 .loan-option-percent-drop-down{width: 22% !important;}
@@ -597,6 +597,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
   width: 70%;
   float: left;
   color: #8F8F8F;
+  background: white;
   font-size: 14px;
   padding: 7px 12px 6px 8px;
   border: 1px solid rgb(178, 178, 178);
@@ -932,6 +933,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
 }
 .managecustomer-right-bx-h4{margin-top: 24px;}
 
+.documents-validation-err{
+    color: #da2d2d;
+    float: left;
+    padding-bottom: 10px;
+    margin-top: -10px;
+}
 .pagging-box-btm{width: 100%; display: inline-block; text-align: center; margin: 40px 0 8px 0px;}
 .customer-search-box-main{width:80%; float:left;margin-bottom: 9px;}
 .first-th-editorder-serchInput{width:12% !important;}
@@ -1027,6 +1034,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
 }
 .right-add-new-button a:hover{background: #008687;color: #fff !important;text-decoration: none;}
 .details-table{width:100%; float: left;}
+.document-browse-btn{margin: 7px 2% 6px 0 !important;}
+.filename-lable{padding-top: 5px;display: inline-block;padding-left: 5px;}
+.btn-xs, .btn-group-xs > .btn{font-size: 11px !important;}
 .table-part {
 	width: 100%;
 	float: left;
@@ -1037,7 +1047,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
 }
 .table-part tr td {
 	text-align: left;
-	padding: 5px 10px 5px 15px;
+	padding: 5px 10px 5px 10px;
 	height:35px;
 }
 .table-part .top-purpal-color-row {
@@ -1302,8 +1312,8 @@ text-align: center;
     .loan-option-percent-drop-down {width: 47% !important;}
     .form-box .text-head-align{width:88% !important;}
     .form-box-lable-right-input .text-head-align{width:90% !important;}
-    .paid-btn-link{padding: 2px 10px;}
-    .unpaid-btn-link{padding: 2px 10px;}
+    .paid-btn-link{padding: 1px 10px;}
+    .unpaid-btn-link{padding: 1px 10px;}
     .unpaid-btn-link-active{padding: 2px 10px;}
     .table-loan-page {
     border-right: 1px solid #c8c8c8;

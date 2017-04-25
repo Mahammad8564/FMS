@@ -1,7 +1,7 @@
 ﻿﻿<div class="managecustomer-right-bx">
-    <h4 class="admin-setting-heding">Manage Order Status</h4>
+    <h4 class="admin-setting-heding">Manage Loan Option</h4>
     <div class="customer-detail-page-contant managecustomer-right-bx-h4" ng-init="vm.getList()">
-        <div class="customer-search-box-main"><input class="serchInput"  ng-model="vm.options.search" ng-change="vm.search()" placeholder="Search by Order Status" type="text"></div>
+        <div class="customer-search-box-main"><input class="serchInput"  ng-model="vm.options.search" ng-change="vm.search()" placeholder="Search by Loan Option" type="text"></div>
         <!--<div class="right-add-new-button"><a ui-sref="secure.setting.edit-orderstatus">Add New</a></div>-->
 
         <div class="details-table">
@@ -11,7 +11,7 @@
                     <tr class="top-purpal-color-row">
                         <th class="customer-detail-th-width-1">
                             <a href="" ng-click="vm.order('title',vm.asc)">
-                                <font>Order Status</font>
+                                <font>Loan Option</font>
                                 <span ng-if="vm.asc === true" class="">
                                     <img ng-src="/images/up-arrow-1.png" alt="">
                                 </span>
@@ -22,13 +22,17 @@
                         </th>
                         
                         <th>Interest Rate</th>
-                        <th>Other Charges</th>
+                        <th>Ins. & Other</th>
+                        <th>Processing Charge</th>
                         <th>Status</th>
                     </tr>
                     <tr ng-repeat="obj in vm.list" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
                         <td data-th="Order Status: " class="top-purpal-color-row2"><a href="" ng-click="vm.edit(obj)" class="customer-name-link">{{obj.title}} </a></td>
                         <td data-th="Order Status: " class="top-purpal-color-row2">{{obj.interestRate}}</td>
-                        <td data-th="Order Status: " class="top-purpal-color-row2">{{obj.otherCharges}}</td>
+                        <td ng-if="obj.includeCharges" data-th="Order Status: " class="top-purpal-color-row2">{{obj.insOther}}</td>
+                        <td ng-if="!obj.includeCharges" data-th="Order Status: " class="top-purpal-color-row2">NA</td>
+                        <td ng-if="obj.includeCharges" data-th="Order Status: " class="top-purpal-color-row2">{{obj.processingCharge}}</td>
+                        <td ng-if="!obj.includeCharges" data-th="Order Status: " class="top-purpal-color-row2">NA</td>
                         <td ng-if="obj.isActive" data-th="Status: " class="top-purpal-color-row2">Active</td>
                         <td ng-if="!obj.isActive" data-th="Status: " class="top-purpal-color-row2">Inactive</td>
                     </tr>

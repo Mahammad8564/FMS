@@ -34,6 +34,10 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             defaultValue: true
         },
+        docStatus: {
+            type: DataTypes.DECIMAL,
+            allowNull: false
+        },
         image1: {
             type: DataTypes.STRING,
             allowNull: true
@@ -64,12 +68,7 @@ module.exports = function (sequelize, DataTypes) {
 
                     Customer.hasMany(models.Loan);
 
-                    Customer.belongsTo(models.Agent, {
-                        onDelete: "CASCADE",
-                        foreignKey: {
-                            allowNull: true
-                        }
-                    });
+                    
                 }
             }
         }

@@ -17,28 +17,8 @@ var getErrorMessage = function (err) {
     }
 }
 
-
-//{
-//    "name": "Hardik Patel",
-//    "gender": "Male",
-//    "dob" : "2/23/2017",
-//    "annerversary" :"2/23/2010",
-//    "phone" : "9033269174",
-//    "mobile" : "9033269174",
-//    "email" : "akashdeep38@gmail.com",
-//    "address" : "c-305, Bharat nagar",
-//    "billingAddress" : "c-305, Bharat nagar",
-//    "remark" : "anything",
-//    "isActive" : true,
-//    "createdById" : 1
-//  }
-
-//getting List of
-//For Geting list of Measurements
 exports.list = function (req, res) {
-    //include: [{ model: User, as: 'createdBy' }]
     req.options.include = [Loan];
-    // req.options.distinct = true;
     Customer.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
         res.json(arrs.rows);
@@ -55,7 +35,6 @@ exports.read = function (req, res) {
 exports.getById = function (req, res, next) {
     Customer.findOne({
         where: { id: req.params.customerId },
-        // include: [{ model: User, as: 'createdBy', attributes: ["fullName", "email", "id"] }, CustomerMeasurement]
     }).then(function (obj) {
         req.customer = obj;
         next();
@@ -66,15 +45,6 @@ exports.getById = function (req, res, next) {
 } 
 
 exports.create = function (req, res) {
-    // req.body.createdById = req.user.id;
-    // if (req.files && req.files.length > 0) {
-    //     req.body.customer.image1 = req.files[0].filename;
-    //     req.body.customer.image2 = req.files[1].filename;
-    //     req.body.customer.image3 = req.files[2].filename;
-    //     req.body.customer.image4 = req.files[3].filename;
-    //     req.body.customer.image5 = req.files[4].filename;
-    //     req.body.customer.image6 = req.files[5].filename;
-    // }
     if (req.body.customer.id) {
         Customer.update(req.body.customer, {
             where: {
@@ -100,24 +70,6 @@ exports.create = function (req, res) {
         });
     }
 }
-
-// exports.update = function (req, res) {
-//     var style = req.style;
-//     _.forEach(req.body, function (val, key) {
-//         style.dataValues[key] = val;
-//     });
-//     Style.update(style.dataValues, {
-//             where: {
-//                 id: req.params.styleId
-//             }
-//         })
-//      .then(function (obj) {
-//          return res.json(obj);
-//     }).catch(function (error) {
-//         return res.status(400).send({ message: getErrorMessage(error) });
-//     });
-
-// }
 
 exports.update = function (req, res) {
 console.log(req.body);

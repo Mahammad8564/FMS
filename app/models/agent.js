@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
-                    Agent.hasMany(models.Customer);
+                    Agent.hasMany(models.Loan);
                 }
             }
         }

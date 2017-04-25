@@ -32,6 +32,18 @@ exports.list = function (req, res) {
     });
 }
 
+exports.today = function (req, res) {
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    Installment.findAll({
+        where: { dueDate: today,status: false}//attributes: ["fullName", "email", "id"]
+    }).then(function (obj) {
+        res.json(obj);
+    }).catch(function (err) {
+        res.status(400).send({ message: getErrorMessage(err) });
+    });
+}
+
 exports.read = function (req, res) {
     res.json(req.installment);
 }

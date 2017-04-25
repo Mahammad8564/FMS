@@ -27,8 +27,8 @@
                     <tr>
                         <td class="table-loan-page"><b>Agent</b></td>
                         <td class="table-loan-page2" ng-init="vm.getAgentList()">
-                            <select placeholder="Select Agent" name="AgentId" ng-model="vm.customerDetail.AgentId"
-                                ng-change="vm.selectAgent(vm.customerDetail.AgentId)" ng-disabled="vm.customerDetail.AgentId">
+                            <select placeholder="Select Agent" name="AgentId" ng-model="vm.AgentId"
+                                ng-change="vm.selectAgent(vm.AgentId)" ng-disabled="vm.AgentId">
                                 <option ng-value="{{os.id}}" ng-repeat="os in vm.agents | filter : {isActive : true}">{{os.name}}</option>
                             </select>
                         </td>
@@ -44,7 +44,7 @@
                     <th>Actual Payment Date</th>
                     <th class="paid-status-width">Status</th>
                 </tr>
-                <tr ng-repeat="obj in vm.loanDetail | orderBy : 'installmentNumber'" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
+                <tr ng-repeat="obj in vm.loanDetail" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
                     <td data-th="Installment No.: " class="top-purpal-color-row2">{{obj.installmentNumber}}</td>
                     <td data-th="Installment Amount: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
                     <td data-th="Payment Due Date: " class="top-purpal-color-row2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>

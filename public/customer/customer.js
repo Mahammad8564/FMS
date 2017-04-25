@@ -54,26 +54,31 @@
                 vm.customer.image1 = file.name;
             });
         }
+
         function displayPhoto2(file) {
             Upload.base64DataUrl(file).then(function (url) {
                 vm.customer.image2 = file.name;
             });
         }
+
         function displayPhoto3(file) {
             Upload.base64DataUrl(file).then(function (url) {
                 vm.customer.image3 = file.name;
             });
         }
+
         function displayPhoto4(file) {
             Upload.base64DataUrl(file).then(function (url) {
                 vm.customer.image4 = file.name;
             });
         }
+
         function displayPhoto5(file) {
             Upload.base64DataUrl(file).then(function (url) {
                 vm.customer.image5 = file.name;
             });
         }
+
         function displayPhoto6(file) {
             Upload.base64DataUrl(file).then(function (url) {
                 vm.customer.image6 = file.name;
@@ -83,12 +88,15 @@
         function edit(obj) {
             $state.go('secure.edit-customer', { id: obj.id });
         }
+
         function editLeave(obj) {
             $state.go('secure.edit-loan', { id: obj.id });
         }
+
         function addLoan(obj) {
             $state.go('secure.edit-loan', { id: obj.id });
         }
+
         function loanDetail(obj) {
             $state.go('secure.loan-detail', { id: obj.id });
         }
@@ -101,8 +109,21 @@
                 vm.isSubmitted = true;
                 return;
             }
+            
             vm.startProcessing = true;
             vm.customer.UserId = Authentication.user.id;
+
+            if(!vm.customer.image1) delete vm.customer.image1;
+            if(!vm.customer.image2) delete vm.customer.image2;
+            if(!vm.customer.image3) delete vm.customer.image3;
+            if(!vm.customer.image4) delete vm.customer.image4;
+            if(!vm.customer.image5) delete vm.customer.image5;
+            if(!vm.customer.image6) delete  vm.customer.image6;
+
+            if(vm.customer1 && vm.customer2 && vm.customer3 && vm.customer4 && vm.customer5 && vm.customer6) vm.customer.docStatus = 3;
+            if((vm.customer1 || vm.customer2 || vm.customer3 || vm.customer4 || vm.customer5 || vm.customer6) && !(vm.customer1 && vm.customer2 && vm.customer3 && vm.customer4 && vm.customer5 && vm.customer6)) vm.customer.docStatus = 2;
+            if(!vm.customer1 && !vm.customer2 && !vm.customer3 && !vm.customer4 && !vm.customer5 && !vm.customer6) vm.customer.docStatus = 1;
+
             if (!vm.customer.id) {
                 upload('/api/customer');
             }
@@ -114,7 +135,7 @@
                 else {
                     Restangular.one('api/customer/' + vm.customer.id).patch(vm.customer).then(function (res) {
                         SweetAlert.swal("customer updated successfully!");
-                        // $state.go('secure.setting.style');
+                        $state.go('secure.customer');
                     });
                 }
             }
@@ -131,6 +152,7 @@
         function pageChange() {
             getList();
         }
+
         function search() {
             vm.options.page = 1;
             vm.options.where = 'name;$like|s|%' + vm.options.search + '%';
@@ -138,15 +160,15 @@
         }
 
         function order(col, ord) {
-
             vm.asc = !vm.asc;
             var ascL = vm.asc ? 'asc' : 'desc';
             vm.options.sort = col + ' ' + ascL;
             vm.options.page = 1;
             getList();
         }
-        //file2: vm.file2,file3: vm.file3,file4: vm.file4,file5: vm.file5,file6: vm.file6,
+
         function upload(url) {
+            vm.customer = Restangular.stripRestangular(vm.customer);
             Upload.upload({
                 url: url,
                 data: { file: vm.file, customer: vm.customer }
@@ -165,6 +187,12 @@
             if ($stateParams.id != 'new') {
                 Restangular.one('api/customer/' + $stateParams.id).get().then(function (res) {
                     vm.customer = res.data;
+                    if (res.data.image1) vm.checkbox1 = true;
+                    if (res.data.image2) vm.checkbox2 = true;
+                    if (res.data.image3) vm.checkbox3 = true;
+                    if (res.data.image4) vm.checkbox4 = true;
+                    if (res.data.image5) vm.checkbox5 = true;
+                    if (res.data.image6) vm.checkbox6 = true;
                 });
             }
         }

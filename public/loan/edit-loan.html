@@ -128,12 +128,12 @@
                 </div>
 
                 <div class="form-box">
-                    <label>Ins. & Other</label>
+                    <label><em id="mandatory" style="color:Red">*</em>Ins. & Other</label>
                     <input ng-model="vm.loan.insOther" name="insOther" type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)">
                 </div>
 
                 <div class="form-box">
-                    <label>Processing Charge</label>
+                    <label><em id="mandatory" style="color:Red">*</em>Processing Charge</label>
                     <input ng-model="vm.loan.processingCharge" name="processingCharge" type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)">
                 </div>
 

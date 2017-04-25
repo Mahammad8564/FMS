@@ -61,6 +61,7 @@ exports.create = function (req, res) {
             plain: true
         });
         var start = new Date();
+        start.setHours(0,0,0,0);
 
         switch (req.body.OrderStatusId) {
             case "1":
@@ -146,6 +147,8 @@ exports.create = function (req, res) {
 
                 var newDate = start.setDate(start.getDate() + opt2);
                 start = new Date(newDate);
+                // start.setHours(0,0,0,0);
+                
 
                 Installment.create(objTemp).then(function (obj) {
                 }).catch(function (error) {
@@ -160,6 +163,8 @@ exports.create = function (req, res) {
 
                 var newDate = start.setDate(start.getDate() + opt2);
                 start = new Date(newDate);
+                // start.setHours(0,0,0,0);
+                
 
                 Installment.create(objTemp).then(function (obj) {
                 }).catch(function (error) {

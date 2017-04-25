@@ -101,7 +101,7 @@
             }
             vm.startProcessing = true;
             vm.loan.interestRate = vm.interestRate;
-            vm.loan.status = 'unpaid';
+            vm.loan.status = 'Unpaid';
             vm.loan.OrderStatusId = vm.loanTypeId;
             vm.loan.loanTenureOption = vm.loanTenureOption;
             if (vm.customer) {
@@ -109,7 +109,8 @@
                     vm.loan.CustomerId = res.data.id;
                     Restangular.all('api/loan').post(vm.loan).then(function (res) {
                         SweetAlert.swal("loan saved successfully!");
-                        $state.go('secure.loan');
+                        // $state.go('secure.loan');
+                        $state.go('secure.loan-detail', { id: res.data.id });
                     }, function (err) {
                         console.log(err);
                         vm.error = err.data.message;
@@ -127,7 +128,8 @@
                 vm.loan.CustomerId = vm.CustomerId;
                 Restangular.all('api/loan').post(vm.loan).then(function (res) {
                     SweetAlert.swal("loan saved successfully!");
-                    $state.go('secure.loan');
+                    // $state.go('secure.loan');
+                    $state.go('secure.loan-detail', { id: res.data.id });
                 }, function (err) {
                     console.log(err);
                     vm.error = err.data.message;
@@ -137,7 +139,8 @@
             else {
                 Restangular.one('api/loan/' + vm.loan.id).patch(vm.loan).then(function (res) {
                     SweetAlert.swal("loan updated successfully!");
-                    $state.go('secure.loan');
+                    // $state.go('secure.loan');
+                    $state.go('secure.loan-detail', { id: res.data.id });
                 }, function (err) {
                     console.log(err);
                     vm.error = err.data.message;
@@ -172,7 +175,7 @@
         }
 
         function selectAgent(id) {
-            Restangular.one('api/customer/' + vm.customerDetail.id).patch({ AgentId: id }).then(function (res) {
+            Restangular.one('api/loan/' + $stateParams.id).patch({ AgentId: id }).then(function (res) {
             }, function (err) {
                 console.log(err);
             });
@@ -214,6 +217,7 @@
                 });
                 vm.loanDetail = res.data;
                 vm.customerDetail = res.data[0].Loan.Customer;
+                vm.AgentId = res.data[0].Loan.AgentId;
                 vm.allPaid = true;
                 res.data.forEach(function (element) {
                     if (element.status == 0) {
@@ -221,7 +225,7 @@
                     }
                 }, this);
                 if (vm.allPaid) {
-                    Restangular.one('api/loan/' + $stateParams.id).patch({ status: 'paid' }).then(function (res) {
+                    Restangular.one('api/loan/' + $stateParams.id).patch({ status: 'Paid' }).then(function (res) {
                     }, function (err) {
                         console.log(err);
                     });
