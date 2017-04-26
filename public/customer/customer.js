@@ -172,7 +172,6 @@
 
         function upload(url) {
             vm.customer = Restangular.stripRestangular(vm.customer);
-            console.log(vm.customer);
             Upload.upload({
                 url: url,
                 data: { file: vm.file, customer: vm.customer }

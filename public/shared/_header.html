@@ -1,19 +1,21 @@
 ﻿<div class="main-header">
-    <div class="logo" ui-sref="secure.dashboard" style="cursor:pointer;"><img src="images/newlogo.png" alt="ProT Boutique"></div>
-    <span class="menu-toggle" ng-click="vm.toggle()">
+
+    <div class="logo" ui-sref="secure.dashboard" style="cursor:pointer;">
+        <img src="images/newlogo.png" alt="ProT Boutique">
+    </div>
+
+    <span class="menu-toggle">
         <i></i>
         <i></i>
         <i></i>
     </span>
+
     <div class="navbar">
         <ul>
-            <li ng-click="vm.toggleActive()" ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'home'}" ui-sref="secure.home">Home</a></li>
-            <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'loan'}"  ui-sref="secure.loan">Loan</a></li>
-            <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'customer'}"  ui-sref="secure.customer">Customers</a></li>
-            <!--<li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'order'}"  ui-sref="secure.order">Orders</a></li>-->
-            <!-- <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'reports'}"  ui-sref="secure.reports">Reports</a></li> -->
-            <!-- <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'notifications'}"  ui-sref="secure.notifications">Notifications</a></li> -->
-            <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highLightSetting === 'setting'}"  ui-sref="secure.setting.agent">Settings</a></li>
+            <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'home'}" ui-sref="secure.home">Home</a></li>
+            <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'loan'}" ui-sref="secure.loan">Loan</a></li>
+            <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highlight === 'customer'}" ui-sref="secure.customer">Customers</a></li>
+            <li ng-if="vm.user"><a ng-class="{'active' : $root.toState.highLightSetting === 'setting'}" ui-sref="secure.setting.agent">Settings</a></li>
             <li ng-if="vm.user" title="logged in as {{vm.user.fullname}}"><a ng-click="vm.logout()" href="">Logout</a></li>
             <li ng-if="!vm.user"><a ng-class="{'active' : $root.toState.highlight === 'home'}" ui-sref="home">Home</a></li>
             <li ng-if="!vm.user"><a ng-class="{'active' : $root.toState.highlight === 'login'}" ui-sref="login">Login</a></li>
@@ -21,3 +23,17 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $(".menu-toggle").click(function () {
+            $(".navbar").slideToggle()
+
+        })
+        $(".navbar ul li").click(function () {
+            $(this).find("ul").slideToggle()
+            $(this).toggleClass("active");
+        })
+
+    });
+</script>

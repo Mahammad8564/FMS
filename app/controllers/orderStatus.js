@@ -62,8 +62,8 @@ exports.create = function (req, res) {
             plain: true
         });
         return res.json(objData);
-    }).catch(function (error) {
-        console.log(error);
+    }).catch(function (err) {
+        console.log(err);
         res.status(400).send({ message: getErrorMessage(error) });
     });
 }

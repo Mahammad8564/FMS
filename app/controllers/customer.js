@@ -64,15 +64,14 @@ exports.create = function (req, res) {
                 plain: true
             });
             return res.json(objData);
-        }).catch(function (error) {
-            console.log(error);
-            res.status(400).send({ message: getErrorMessage(error) });
+        }).catch(function (err) {
+            console.log(err);
+            res.status(400).send({ message: getErrorMessage(err) });
         });
     }
 }
 
 exports.update = function (req, res) {
-console.log(req.body);
     Customer.update(req.body, {
         where: {
             id: req.params.customerId
@@ -82,6 +81,4 @@ console.log(req.body);
     }).catch(function (error) {
         return res.status(400).send({ message: getErrorMessage(error) });
     });
-
-
 }

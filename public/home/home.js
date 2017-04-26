@@ -24,9 +24,6 @@
                 vm.customers = tmp.filter(function (data) {
                     return data.docStatus != 3;
                 });
-                console.log(vm.customers);
-                // vm.options.totalItems = res.data.length;
-                // vm.options.totalItems = parseInt(res.headers('total'));
             });
         }
 

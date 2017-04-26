@@ -32,7 +32,6 @@
                         //check for invalid date or 1-1-1970
                         var dt = new Date(val);
                         var format = formatDate(dt);
-                        console.log(format);
                         if (format == '1970-01-01') {
                             return null;
                         }

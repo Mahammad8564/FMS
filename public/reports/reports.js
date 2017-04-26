@@ -113,8 +113,6 @@
 
         function customerChange(custId) {
             vm.custId = custId;
-            // vm.cust = _.find(vm.customers, ['id', parseInt(custId)]);
-            // console.log(custId);
         }
 
         function openCal() {
@@ -370,7 +368,6 @@
                             res[value.orderDate].totalamount += value.totalamount
                             return res;
                         }, {});
-                        console.log(vm.records);
                     }, function (err) {
                         console.log(err);
                     });

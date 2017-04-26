@@ -151,8 +151,8 @@ exports.create = function (req, res) {
                 
 
                 Installment.create(objTemp).then(function (obj) {
-                }).catch(function (error) {
-                    console.log('error');
+                }).catch(function (err) {
+                    console.log(err);
                 });
             }
         }
@@ -167,8 +167,8 @@ exports.create = function (req, res) {
                 
 
                 Installment.create(objTemp).then(function (obj) {
-                }).catch(function (error) {
-                    console.log('error');
+                }).catch(function (err) {
+                    console.log(err);
                 });
             }
         }
