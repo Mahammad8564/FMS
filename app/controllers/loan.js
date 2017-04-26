@@ -2,7 +2,7 @@
 var Loan = models.Loan;
 var Installment = models.Installment;
 var Customer = models.Customer;
-var OrderStatus = models.OrderStatus;
+var LoanOption = models.LoanOption;
 var User = models.User;
 var Sequelize = require('sequelize');
 var _ = require('underscore');
@@ -23,7 +23,7 @@ var getErrorMessage = function (err) {
 //getting List of 
 //For Geting list of Loans
 exports.list = function (req, res) {
-    req.options.include = [Customer, OrderStatus];
+    req.options.include = [Customer, LoanOption];
     Loan.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
         res.json(arrs.rows);
@@ -63,7 +63,7 @@ exports.create = function (req, res) {
         var start = new Date();
         start.setHours(0,0,0,0);
 
-        switch (req.body.OrderStatusId) {
+        switch (req.body.LoanOptionId) {
             case "1":
                 switch (req.body.loanTenureOption) {
                     case 1:

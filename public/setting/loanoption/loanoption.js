@@ -24,7 +24,7 @@
         }
         vm.getList = getList;
         if ($stateParams.id && $stateParams.id != 'new') {
-            Restangular.one('api/orderStatus/' + $stateParams.id).get().then(function (res) {
+            Restangular.one('api/loanOption/' + $stateParams.id).get().then(function (res) {
                 vm.loanOption = res.data;
             });
         }
@@ -43,8 +43,8 @@
             }
             vm.startProcessing = true;
             if (!vm.loanOption.id) {
-                Restangular.all('api/orderStatus').post(vm.loanOption).then(function (res) {
-                    SweetAlert.swal("Order Status saved successfully!");
+                Restangular.all('api/loanOption').post(vm.loanOption).then(function (res) {
+                    // swal("Order Status saved successfully!");
                     $state.go('secure.setting.loanoption');
                 }, function (err) {
                     console.log(err);
@@ -53,8 +53,8 @@
                 });
             }
             else {
-                Restangular.one('api/orderStatus/' + vm.loanOption.id).patch(vm.loanOption).then(function (res) {
-                    SweetAlert.swal("Order Status updated successfully!");
+                Restangular.one('api/loanOption/' + vm.loanOption.id).patch(vm.loanOption).then(function (res) {
+                    // swal("Order Status updated successfully!");
                     $state.go('secure.setting.loanoption');
                 }, function (err) {
                     console.log(err);
@@ -65,7 +65,7 @@
         }
 
         function getList() {
-            Restangular.all('api/orderStatus').getList(vm.options).then(function (res) {
+            Restangular.all('api/loanOption').getList(vm.options).then(function (res) {
                 vm.list = res.data;
                 vm.options.totalItems = parseInt(res.headers('total'));
             });

@@ -1,6 +1,6 @@
 ﻿"use strict";
 module.exports = function (sequelize, DataTypes) {
-    var OrderStatus = sequelize.define("OrderStatus", {
+    var LoanOption = sequelize.define("LoanOption", {
         title: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -34,11 +34,11 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
-                    OrderStatus.hasMany(models.Loan);
+                    LoanOption.hasMany(models.Loan);
                 }
             }
         }
     );
 
-    return OrderStatus;
+    return LoanOption;
 };

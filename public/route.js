@@ -154,6 +154,18 @@
                 controller: 'AgentController',
                 controllerAs: 'vm'
             })
+            .state('secure.setting.edit-agent', {
+                url: '/agent/{id}',
+                params: {
+                    id: { value: 'new' }
+                },
+                templateUrl: '/setting/agent/edit-agent.html',
+                title: 'Agent',
+                highlight: 'agent',
+                highLightSetting: 'setting',
+                controller: 'AgentController',
+                controllerAs: 'vm'
+            })
             .state('secure.setting.latefee', {
                 url: '/latefee',
                 templateUrl: '/setting/latefee/latefee.html',
@@ -163,14 +175,14 @@
                 controller: 'AgentController',
                 controllerAs: 'vm'
             })
-            .state('secure.setting.edit-agent', {
-                url: '/agent/{id}',
+            .state('secure.setting.edit-latefee', {
+                url: '/latefee/{id}',
                 params: {
                     id: { value: 'new' }
                 },
-                templateUrl: '/setting/agent/edit-agent.html',
-                title: 'Agent',
-                highlight: 'agent',
+                templateUrl: '/setting/latefee/edit-latefee.html',
+                title: 'Late Fee',
+                highlight: 'latefee',
                 highLightSetting: 'setting',
                 controller: 'AgentController',
                 controllerAs: 'vm'

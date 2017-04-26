@@ -71,7 +71,7 @@ module.exports = function (sequelize, DataTypes) {
                         }
                     });
 
-                    Loan.belongsTo(models.OrderStatus, {
+                    Loan.belongsTo(models.LoanOption, {
                         onDelete: "CASCADE",
                         foreignKey: {
                             allowNull: false

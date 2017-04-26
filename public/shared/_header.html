@@ -27,13 +27,12 @@
 <script type="text/javascript">
     $(document).ready(function (e) {
         $(".menu-toggle").click(function () {
+            console.log('sjgjs');
             $(".navbar").slideToggle()
-
         })
         $(".navbar ul li").click(function () {
             $(this).find("ul").slideToggle()
             $(this).toggleClass("active");
         })
-
     });
 </script>

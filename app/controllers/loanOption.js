@@ -1,5 +1,5 @@
 ﻿var models = require('../models');
-var OrderStatus = models.OrderStatus;
+var LoanOption = models.LoanOption;
 var User = models.User;
 var Sequelize = require('sequelize');
 var _ = require('underscore');
@@ -25,9 +25,9 @@ var getErrorMessage = function (err) {
 
 
 //getting List of 
-//For Geting list of OrderStatuss
+//For Geting list of LoanOptions
 exports.list = function (req, res) {
-    OrderStatus.findAndCountAll(req.options).then(function (arrs) {
+    LoanOption.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
         res.json(arrs.rows);
     }).catch(function (err) {
@@ -37,15 +37,15 @@ exports.list = function (req, res) {
 }
 
 exports.read = function (req, res) {
-    res.json(req.orderStatus);
+    res.json(req.loanOption);
 }
 
 exports.getById = function (req,res,next) {
-    OrderStatus.findOne({
-        where: { id: req.params.orderStatusId},
+    LoanOption.findOne({
+        where: { id: req.params.loanOptionId},
         //include: []
     }).then(function (obj) {
-        req.orderStatus = obj;
+        req.loanOption = obj;
         next();
     }).catch(function (err) {
         console.log(err);
@@ -54,7 +54,7 @@ exports.getById = function (req,res,next) {
 }
 
 exports.create = function (req, res) {
-    OrderStatus.create(req.body).then(function (obj) {
+    LoanOption.create(req.body).then(function (obj) {
         if (!obj) {
             return res.send({ message: "Error Occured while updataing" });
         }
@@ -69,13 +69,13 @@ exports.create = function (req, res) {
 }
 
 exports.update = function (req, res) {
-    var orderStatus = req.orderStatus;
+    var loanOption = req.loanOption;
     _.forEach(req.body, function (val, key) {
-        orderStatus.dataValues[key] = val;
+        loanOption.dataValues[key] = val;
     });
-    OrderStatus.update(orderStatus.dataValues, {
+    LoanOption.update(loanOption.dataValues, {
             where: {
-                id: req.params.orderStatusId
+                id: req.params.loanOptionId
             }
         })
      .then(function (obj) {

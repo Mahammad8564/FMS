@@ -9,7 +9,7 @@
             <div class="form-section-box form-section-box-2">
 
                 <div class="form-box">
-                    <label><em id="mandatory" style="color:Red">*</em>Agent Name</label>
+                    <label>Minimum Amount<em id="mandatory" style="color:Red">*</em></label>
                     <input id="name" name="name" required type="text" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-model="vm.agent.name" ng-minlength="2"
                         ng-maxlength="30">
                     <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.pattern">No special characters are allowed.</span>
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="form-box">
-                    <label><em id="mandatory" style="color:Red">*</em>Mobile Number</label>
+                    <label>Maximum Ammount<em id="mandatory" style="color:Red">*</em></label>
                     <input ng-model="vm.agent.mobileNumber" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10" required
                         type="text">
                     <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && agentForm.mobile.$error.required"><i><b>Mobile Number</b></i> is required.</span>
@@ -27,8 +27,19 @@
                 </div>
 
                 <div class="form-box">
-                    <label>Address</label>
-                    <textarea ng-model="vm.agent.address" rows="2" cols="50"></textarea>
+                    <label>Late Fee<em id="mandatory" style="color:Red">*</em></label>
+                    <input ng-model="vm.agent.mobileNumber" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10" required
+                        type="text">
+                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && agentForm.mobile.$error.required"><i><b>Mobile Number</b></i> is required.</span>
+                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && (agentForm.mobile.$error.pattern || agentForm.mobile.$error.minlength || agentForm.mobile.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
+                </div>
+
+                <div class="form-box">
+                    <label>RTN Charge<em id="mandatory" style="color:Red">*</em></label>
+                    <input ng-model="vm.agent.mobileNumber" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10" required
+                        type="text">
+                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && agentForm.mobile.$error.required"><i><b>Mobile Number</b></i> is required.</span>
+                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && (agentForm.mobile.$error.pattern || agentForm.mobile.$error.minlength || agentForm.mobile.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
                 </div>
 
                 <div class="form-box">

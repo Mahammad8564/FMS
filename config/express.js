@@ -52,7 +52,7 @@ module.exports = function(){
     require('../app/routes/customer.js')(app);
     require('../app/routes/agent.js')(app);
     require('../app/routes/loan.js')(app);
-    require('../app/routes/orderStatus.js')(app);
+    require('../app/routes/loanOption.js')(app);
     require('../app/routes/installment')(app);
 
     app.use(express.static('./public'));

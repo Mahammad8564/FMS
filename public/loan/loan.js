@@ -44,7 +44,7 @@
         }
 
         function changeLoanType() {
-            Restangular.one('api/orderStatus/' + vm.loanTypeId).get().then(function (res) {
+            Restangular.one('api/loanOption/' + vm.loanTypeId).get().then(function (res) {
                 vm.interestRate = res.data.interestRate/1200;
                 if (res.data.includeCharges == 1) {
                     vm.includeCharges = true;
@@ -102,7 +102,7 @@
             vm.startProcessing = true;
             vm.loan.interestRate = vm.interestRate;
             vm.loan.status = 'Unpaid';
-            vm.loan.OrderStatusId = vm.loanTypeId;
+            vm.loan.loanOptionId = vm.loanTypeId;
             vm.loan.loanTenureOption = vm.loanTenureOption;
             if (vm.customer) {
                 Restangular.all('api/customer').post({ customer: vm.customer }).then(function (res) {
@@ -163,7 +163,7 @@
         }
 
         function getLoanTypeList() {
-            Restangular.all('api/orderStatus').getList().then(function (res) {
+            Restangular.all('api/loanOption').getList().then(function (res) {
                 vm.loanTypes = res.data;
             });
         }
