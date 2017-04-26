@@ -30,12 +30,14 @@
         }
         vm.customer = {};
         vm.today = new Date();
+        vm.flag = false;
         vm.displayPhoto1 = displayPhoto1;
         vm.displayPhoto2 = displayPhoto2;
         vm.displayPhoto3 = displayPhoto3;
         vm.displayPhoto4 = displayPhoto4;
         vm.displayPhoto5 = displayPhoto5;
         vm.displayPhoto6 = displayPhoto6;
+
 
         function download(filename) {
             $http.get('http://localhost:3004/' + filename, { responseType: 'blob' })
@@ -46,43 +48,39 @@
                         { type: "image/*" }
                     );
                     saveAs(blob, filename);
+                }, function (err) {
+
                 });
         }
 
         function displayPhoto1(file) {
-            Upload.base64DataUrl(file).then(function (url) {
-                vm.customer.image1 = file.name;
-            });
+            vm.customer.image1 = file.name;
+            vm.flag1 = false;
         }
 
         function displayPhoto2(file) {
-            Upload.base64DataUrl(file).then(function (url) {
-                vm.customer.image2 = file.name;
-            });
+            vm.customer.image2 = file.name;
+            vm.flag1 = false;
         }
 
         function displayPhoto3(file) {
-            Upload.base64DataUrl(file).then(function (url) {
-                vm.customer.image3 = file.name;
-            });
+            vm.customer.image3 = file.name;
+            vm.flag1 = false;
         }
 
         function displayPhoto4(file) {
-            Upload.base64DataUrl(file).then(function (url) {
-                vm.customer.image4 = file.name;
-            });
+            vm.customer.image4 = file.name;
+            vm.flag1 = false;
         }
 
         function displayPhoto5(file) {
-            Upload.base64DataUrl(file).then(function (url) {
-                vm.customer.image5 = file.name;
-            });
+            vm.customer.image5 = file.name;
+            vm.flag2 = false;
         }
 
         function displayPhoto6(file) {
-            Upload.base64DataUrl(file).then(function (url) {
-                vm.customer.image6 = file.name;
-            });
+            vm.customer.image6 = file.name;
+            vm.flag2 = false;
         }
 
         function edit(obj) {
@@ -102,32 +100,37 @@
         }
 
         function save(form) {
-            if (form.$invalid) {
+
+            if (!vm.customer.image1 && !vm.customer.image2 && !vm.customer.image3 && !vm.customer.image4) vm.flag1 = true;
+            if (!vm.customer.image5 && !vm.customer.image6) vm.flag2 = true;
+
+            if (form.$invalid || vm.flag1 || vm.flag2) {
                 _.forEach(form.$error.required, function (frm) {
                     frm.$setDirty();
                 });
                 vm.isSubmitted = true;
                 return;
             }
-            
+
             vm.startProcessing = true;
             vm.customer.UserId = Authentication.user.id;
 
-            if(!vm.customer.image1) delete vm.customer.image1;
-            if(!vm.customer.image2) delete vm.customer.image2;
-            if(!vm.customer.image3) delete vm.customer.image3;
-            if(!vm.customer.image4) delete vm.customer.image4;
-            if(!vm.customer.image5) delete vm.customer.image5;
-            if(!vm.customer.image6) delete  vm.customer.image6;
-
-            if(vm.customer1 && vm.customer2 && vm.customer3 && vm.customer4 && vm.customer5 && vm.customer6) vm.customer.docStatus = 3;
-            if((vm.customer1 || vm.customer2 || vm.customer3 || vm.customer4 || vm.customer5 || vm.customer6) && !(vm.customer1 && vm.customer2 && vm.customer3 && vm.customer4 && vm.customer5 && vm.customer6)) vm.customer.docStatus = 2;
-            if(!vm.customer1 && !vm.customer2 && !vm.customer3 && !vm.customer4 && !vm.customer5 && !vm.customer6) vm.customer.docStatus = 1;
+            if ((vm.customer.image1 || vm.customer.image2 || vm.customer.image3 || vm.customer.image4) || (vm.customer.image5 || vm.customer.image6)) vm.customer.docStatus = 2;
+            if ((vm.customer.image1 || vm.customer.image2 || vm.customer.image3 || vm.customer.image4) && (vm.customer.image5 || vm.customer.image6)) vm.customer.docStatus = 3;
+            if (!vm.customer.image1 && !vm.customer.image2 && !vm.customer.image3 && !vm.customer.image4 && !vm.customer.image5 && !vm.customer.image6) vm.customer.docStatus = 1;
 
             if (!vm.customer.id) {
                 upload('/api/customer');
             }
+
             else {
+
+                // if (!vm.customer.image1) delete vm.customer.image1;
+                // if (!vm.customer.image2) delete vm.customer.image2;
+                // if (!vm.customer.image3) delete vm.customer.image3;
+                // if (!vm.customer.image4) delete vm.customer.image4;
+                // if (!vm.customer.image5) delete vm.customer.image5;
+                // if (!vm.customer.image6) delete vm.customer.image6;
 
                 if (vm.file.length > 0) {
                     upload('api/customer');
@@ -169,6 +172,7 @@
 
         function upload(url) {
             vm.customer = Restangular.stripRestangular(vm.customer);
+            console.log(vm.customer);
             Upload.upload({
                 url: url,
                 data: { file: vm.file, customer: vm.customer }
@@ -187,12 +191,12 @@
             if ($stateParams.id != 'new') {
                 Restangular.one('api/customer/' + $stateParams.id).get().then(function (res) {
                     vm.customer = res.data;
-                    if (res.data.image1) vm.checkbox1 = true;
-                    if (res.data.image2) vm.checkbox2 = true;
-                    if (res.data.image3) vm.checkbox3 = true;
-                    if (res.data.image4) vm.checkbox4 = true;
-                    if (res.data.image5) vm.checkbox5 = true;
-                    if (res.data.image6) vm.checkbox6 = true;
+                    if (res.data.image1) { vm.checkbox1 = true; vm.file[0] = true; }
+                    if (res.data.image2) { vm.checkbox2 = true; vm.file[1] = true; }
+                    if (res.data.image3) { vm.checkbox3 = true; vm.file[2] = true; }
+                    if (res.data.image4) { vm.checkbox4 = true; vm.file[3] = true; }
+                    if (res.data.image5) { vm.checkbox5 = true; vm.file[4] = true; }
+                    if (res.data.image6) { vm.checkbox6 = true; vm.file[5] = true; }
                 });
             }
         }

@@ -70,12 +70,12 @@
                     <div class="form-subHeading" style="padding-top: 0px;">Proof Of Identity<em id="mandatory" style="color:Red">*</em></div>
 
                     <div class="form-box">
-                        <input ng-model="vm.checkbox1" class="billing-addres-checkbox clothcheck" type="checkbox">
+                        <input ng-model="vm.checkbox1" class="billing-addres-checkbox clothcheck" type="checkbox" ng-change="vm.customer.image1 = '';vm.file[0] = ''">
                         <label class="text-head-align document-browse-btn">Adhar Card</label>
 
                         <button ng-if="vm.checkbox1" name="checkbox1" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto1($file)" ng-model="vm.file[0]"
-                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize>Browse</button>
-
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize ng-required="vm.checkbox1">Browse</button>
+                        <span class="documents-validation-err" ng-if="(customerForm.checkbox1.$dirty || vm.isSubmitted) && customerForm.checkbox1.$error.required"><i><b>File</b></i> is required.</span>
                         <!--<img class="addsubdesign-browse-img" ng-if="vm.customer.image1" ng-src="{{vm.customer.image1}}"
                                 height="200" width="200">-->
                         <a class="filename-lable" ng-if="vm.checkbox1 && vm.customer.image1" ng-click="vm.download(vm.customer.image1)">{{vm.customer.image1}}</a>
@@ -83,70 +83,73 @@
                     </div>
 
                     <div class="form-box">
-                        <input ng-model="vm.checkbox2" class="billing-addres-checkbox clothcheck" type="checkbox">
+                        <input ng-model="vm.checkbox2" class="billing-addres-checkbox clothcheck" type="checkbox" ng-change="vm.customer.image2 = '';vm.file[1] = ''">
                         <label class="text-head-align document-browse-btn">Driving License</label>
 
                         <button ng-if="vm.checkbox2" name="checkbox2" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto2($file)" ng-model="vm.file[1]"
-                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize>Browse</button>
-
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize ng-required="vm.checkbox2">Browse</button>
+                        <span class="documents-validation-err" ng-if="(customerForm.checkbox2.$dirty || vm.isSubmitted) && customerForm.checkbox2.$error.required"><i><b>File</b></i> is required.</span>
                         <!--<img class="addsubdesign-browse-img" ng-if="vm.checkbox2 && vm.localPicture2 || vm.style.image" ng-src="{{vm.localPicture2 || vm.style.image}}"
                                 height="200" width="200">-->
                         <a class="filename-lable" ng-if="vm.checkbox2 && vm.customer.image2" ng-click="vm.download(vm.customer.image2)">{{vm.customer.image2}}</a>
                     </div>
 
                     <div class="form-box">
-                        <input ng-model="vm.checkbox3" class="billing-addres-checkbox clothcheck" type="checkbox">
+                        <input ng-model="vm.checkbox3" class="billing-addres-checkbox clothcheck" type="checkbox" ng-change="vm.customer.image3 = '';vm.file[2] = ''">
                         <label class="text-head-align document-browse-btn">Voter Id Card</label>
 
                         <button ng-if="vm.checkbox3" name="checkbox3" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto3($file)" ng-model="vm.file[2]"
-                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize>Browse</button>
-
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize ng-required="vm.checkbox3">Browse</button>
+                        <span class="documents-validation-err" ng-if="(customerForm.checkbox3.$dirty || vm.isSubmitted) && customerForm.checkbox3.$error.required"><i><b>File</b></i> is required.</span>
                         <!--<img class="addsubdesign-browse-img" ng-if="vm.checkbox3 && vm.localPicture3 || vm.style.image" ng-src="{{vm.localPicture3 || vm.style.image}}"
                                 height="200" width="200">-->
                         <a class="filename-lable" ng-if="vm.checkbox3 && vm.customer.image3" ng-click="vm.download(vm.customer.image3)">{{vm.customer.image3}}</a>
                     </div>
 
                     <div class="form-box">
-                        <input ng-model="vm.checkbox4" class="billing-addres-checkbox clothcheck" type="checkbox">
+                        <input ng-model="vm.checkbox4" class="billing-addres-checkbox clothcheck" type="checkbox" ng-change="vm.customer.image4 = '';vm.file[3] = ''">
                         <label class="text-head-align document-browse-btn">Passport</label>
 
                         <button ng-if="vm.checkbox4" name="checkbox4" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto4($file)" ng-model="vm.file[3]"
-                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize>Browse</button>
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize ng-required="vm.checkbox4">Browse</button>
+                        <span class="documents-validation-err" ng-if="(customerForm.checkbox4.$dirty || vm.isSubmitted) && customerForm.checkbox4.$error.required"><i><b>File</b></i> is required.</span>
 
                         <!--<img class="addsubdesign-browse-img" ng-if="vm.checkbox4 && vm.localPicture4 || vm.style.image" ng-src="{{vm.localPicture4 || vm.style.image}}"
                                 height="200" width="200">-->
                         <a class="filename-lable" ng-if="vm.checkbox4 && vm.customer.image4" ng-click="vm.download(vm.customer.image4)">{{vm.customer.image4}}</a>
                     </div>
-                    <!--<span class="documents-validation-err" ng-if="customerForm.checkbox1.$dirty || vm.isSubmitted">Any one <i><b>Proof Of Identity</b></i> is required.</span>-->
+                    <span class="all-documents-validation-err" ng-if="vm.flag1">Any one <i><b>Proof Of Identity</b></i> is required.</span>
                 </div>
 
                 <div>
                     <div class="form-subHeading">Proof Of Residence<em id="mandatory" style="color:Red">*</em></div>
 
                     <div class="form-box-lable-right-input">
-                        <input ng-model="vm.checkbox5" class="billing-addres-checkbox clothcheck" name="checkbox5" type="checkbox">
+                        <input ng-model="vm.checkbox5" class="billing-addres-checkbox clothcheck" type="checkbox" ng-change="vm.customer.image5 = '';vm.file[4] = ''">
                         <label class="text-head-align document-browse-btn">Recent Telephone Bill</label>
 
-                        <button ng-if="vm.checkbox5" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto5($file)" ng-model="vm.file[4]"
-                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize>Browse</button>
+                        <button ng-if="vm.checkbox5" name="checkbox5" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto5($file)" ng-model="vm.file[4]"
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize ng-required="vm.checkbox5">Browse</button>
+                        <span class="documents-validation-err" ng-if="(customerForm.checkbox5.$dirty || vm.isSubmitted) && customerForm.checkbox5.$error.required"><i><b>File</b></i> is required.</span>
 
                         <!--<img class="addsubdesign-browse-img" ng-if="vm.checkbox5 && vm.localPicture5 || vm.style.image" ng-src="{{vm.localPicture5 || vm.style.image}}"
                                 height="200" width="200">-->
-                        <a class="filename-lable" ng-if="vm.checkbox5 && vm.customer.image5" ng-click="vm.download(vm.customer.image4)">{{vm.customer.image5}}</a>
+                        <a class="filename-lable" ng-if="vm.checkbox5 && vm.customer.image5" ng-click="vm.download(vm.customer.image5)">{{vm.customer.image5}}</a>
                     </div>
 
                     <div class="form-box">
-                        <input ng-model="vm.checkbox6" class="billing-addres-checkbox clothcheck" name="checkbox6" type="checkbox">
+                        <input ng-model="vm.checkbox6" class="billing-addres-checkbox clothcheck" type="checkbox" ng-change="vm.customer.image6 = '';vm.file[5] = ''">
                         <label class="text-head-align document-browse-btn">Recent Electricity Bill</label>
 
-                        <button ng-if="vm.checkbox6" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto6($file)" ng-model="vm.file[5]"
-                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize>Browse</button>
+                        <button ng-if="vm.checkbox6" name="checkbox6" type="button" class="choose-a-image-btn" ngf-select="vm.displayPhoto6($file)" ng-model="vm.file[5]"
+                            ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="3MB" ngf-min-height="10" ngf-resize ng-required="vm.checkbox6">Browse</button>
+                        <span class="documents-validation-err" ng-if="(customerForm.checkbox6.$dirty || vm.isSubmitted) && customerForm.checkbox6.$error.required"><i><b>File</b></i> is required.</span>
 
                         <!--<img class="addsubdesign-browse-img" ng-if="vm.checkbox6 && vm.localPicture6 || vm.style.image" ng-src="{{vm.localPicture6 || vm.style.image}}"
                                 height="200" width="200">-->
-                        <a class="filename-lable" ng-if="vm.checkbox6 && vm.customer.image6" ng-click="vm.download(vm.customer.image5)">{{vm.customer.image6}}</a>
+                        <a class="filename-lable" ng-if="vm.checkbox6 && vm.customer.image6" ng-click="vm.download(vm.customer.image6)">{{vm.customer.image6}}</a>
                     </div>
-                    <!--<span class="documents-validation-err" ng-if="(!vm.customer.image6 && !vm.customer.image6) && (customerForm.checkbox5.$dirty || customerForm.checkbox6.$dirty || vm.isSubmitted)">Any one <i><b>Proof Of Residence</b></i> is required.</span>-->
+                    <span class="all-documents-validation-err" ng-if="vm.flag2">Any one <i><b>Proof Of Residence.</b></i> is required</span>
                 </div>
 
 

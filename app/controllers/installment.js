@@ -36,7 +36,8 @@ exports.today = function (req, res) {
     var today = new Date();
     today.setHours(0,0,0,0);
     Installment.findAll({
-        where: { dueDate: today,status: false}//attributes: ["fullName", "email", "id"]
+        where: { dueDate: today,status: false},//attributes: ["fullName", "email", "id"]
+        include: [{ model: Loan, include: [Customer]}]
     }).then(function (obj) {
         res.json(obj);
     }).catch(function (err) {

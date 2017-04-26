@@ -129,12 +129,16 @@
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Ins. & Other</label>
-                    <input ng-model="vm.loan.insOther" name="insOther" type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)">
+                    <input ng-model="vm.loan.insOther" name="insOther" type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)" required ng-max="vm.loan.disbursementAmount">
+                    <span ng-if="(loanForm.insOther.$dirty || vm.isSubmitted) && loanForm.insOther.$error.required"><i><b>Ins. & Other</b></i> is required.</span>
+                    <span ng-if="(loanForm.insOther.$dirty || vm.isSubmitted) && loanForm.insOther.$error.max"><i><b>Ins. & Other</b></i> should not be greater than <i><b>Disbursement Amount</b></i>.</span>
                 </div>
 
                 <div class="form-box">
                     <label><em id="mandatory" style="color:Red">*</em>Processing Charge</label>
-                    <input ng-model="vm.loan.processingCharge" name="processingCharge" type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)">
+                    <input ng-model="vm.loan.processingCharge" name="processingCharge" type="number" ng-change="vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure)" required ng-max="vm.loan.disbursementAmount">
+                    <span ng-if="(loanForm.processingCharge.$dirty || vm.isSubmitted) && loanForm.processingCharge.$error.required"><i><b>Processing Charge</b></i> is required.</span>
+                    <span ng-if="(loanForm.insOther.$dirty || vm.isSubmitted) && loanForm.processingCharge.$error.max"><i><b>Processing Charge</b></i> should not be greater than <i><b>Disbursement Amount</b></i>.</span>
                 </div>
 
                 <div class="form-box">

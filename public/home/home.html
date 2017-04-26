@@ -1,73 +1,89 @@
 ﻿<div class="inner-heading-bar">Home</div>
 
-<div class="main-contant-part minpageheight">
+<div class="main-contant-part minpageheight" ng-init="vm.getCustomerList()">
     <div class="home-icons-box">
 
+        <div class="col-md-3">
+            <div>Customer's details pending</div>
+            <div ng-repeat="obj in vm.customers">
+                <a ng-click="vm.editCustomer(obj)" class="customer-name-link">{{obj.name}}</a>
+                <div class="progress">
+                    <div ng-if="obj.docStatus == 1" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                        aria-valuemax="100" style="width:0%">
+                        0% Details filled
+                    </div>
+                    <div ng-if="obj.docStatus == 2" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                        aria-valuemax="100" style="width:50%">
+                        50% Details filled
+                    </div>
+                    <div ng-if="obj.docStatus == 3" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                        aria-valuemax="100" style="width:100%">
+                        100% Details filled
+                    </div>
+                </div>
 
-        <table ng-init="vm.getCustomerList()" class="table-part" border="0" cellspacing="0" cellpadding="0">
-            <tr class="top-purpal-color-row">
-                <!--<th>Details</th>-->
-                <th>
-                    <a href="" ng-click="vm.order('name',vm.asc)">
-                        <font>Customer Name</font>
-                        <span ng-if="vm.asc === true" class="">
+
+            </div>
+            <!--<table ng-init="vm.getCustomerList()" class="table-part" border="0" cellspacing="0" cellpadding="0">
+                <tr class="top-purpal-color-row">
+                    <th>Details</th>
+                    <th>
+                        <a href="" ng-click="vm.order('name',vm.asc)">
+                            <font>Customer Name</font>
+                            <span ng-if="vm.asc === true" class="">
                                 <img ng-src="/images/up-arrow-1.png" alt="">
                             </span>
-                        <span ng-show="vm.asc === false" class="">
+                            <span ng-show="vm.asc === false" class="">
                                 <img ng-src="/images/down-arrow-1.png" alt="">
                             </span>
-                    </a>
-                </th>
-                <th>Mobile No</th>
-                <th>Ref. Mobile No</th>
-                <th>Address</th>
-                <!--<th>Action</th>-->
-            </tr>
-            <tr ng-repeat="obj in vm.customers" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
-                <!--<td data-th="Details: " class="top-purpal-color-row2">
-                    <img ng-if="obj.image1 && obj.image2 && obj.image3 && obj.image4 && obj.image5 && obj.image6" src="images/green-light.jpg"
-                        height="30" width="30">
-                    <img ng-if="!obj.image1 && !obj.image2 && !obj.image3 && !obj.image4 && !obj.image5 && !obj.image6" src="images/red-light.png"
-                        height="30" width="30">
-                    <img ng-if="(obj.image1 || obj.image2 || obj.image3 || obj.image4 || obj.image5 || obj.image6) && !(obj.image1 && obj.image2 && obj.image3 && obj.image4 && obj.image5 && obj.image6)"
-                        src="images/yellow-light.png" height="30" width="30"></td>-->
-                <td data-th="Order Id: " class="top-purpal-color-row2"><a ng-click="vm.edit(obj)" class="customer-name-link">{{obj.name}}</a></td>
-                <td data-th="Order Date: " class="top-purpal-color-row2">{{obj.mobile}}</td>
-                <td data-th="Customer Name: " class="top-purpal-color-row2">{{obj.phone}}</td>
-                <td data-th="Status: " class="top-purpal-color-row2">{{obj.address}} </td>
-                <!--<td data-th="Action: " class="top-purpal-color-row2">
-                    <button class="btn btn-xs btn-success" ng-click="obj.show = !obj.show">
-                            <span ng-if="!obj.show">+ Expand</span>
-                            <span ng-if="obj.show">- Collapse</span>
-                        </button>
-                    <button class="btn btn-xs btn-success" ng-click="vm.addLoan(obj)">
-                            <span>Add Loan</span>
-                        </button>
-                </td>-->
-            </tr>
+                        </a>
+                    </th>
+                </tr>
+                <tr ng-repeat="obj in vm.customers" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
+                    <td data-th="Details: " class="top-purpal-color-row2" style="text-align: center">
+                        <cite title="Customer details are completed."><img ng-if="obj.docStatus == 3" src="images/green.png"></cite>
+                        <cite title="Customer details are pending."><img ng-if="obj.docStatus == 2" src="images/yellow.png"></cite>
+                        <cite title="Customer details are missing."><img ng-if="obj.docStatus == 1" src="images/red.png"></cite>
+                    </td>
+                    <td data-th="Order Id: " class="top-purpal-color-row2"><a ng-click="vm.editCustomer(obj)" class="customer-name-link">{{obj.name}}</a></td>
+                    <td data-th="Order Date: " class="top-purpal-color-row2">{{obj.mobile}}</td>
+                    <td data-th="Customer Name: " class="top-purpal-color-row2">{{obj.phone}}</td>
+                    <td data-th="Status: " class="top-purpal-color-row2">{{obj.address}} </td>
+                </tr>
 
-        </table>
+            </table>-->
+        </div>
 
-        <table class="table-part" border="0" cellspacing="0" cellpadding="0" style="margin-top: 25px;float: left;">
-            <tr class="top-purpal-color-row">
-                <th>Installment No.</th>
-                <th>Installment Amount</th>
-                <th>Payment Due Date</th>
-                <th>Actual Payment Date</th>
-                <th class="paid-status-width">Status</th>
-            </tr>
-            <tr ng-repeat="obj in vm.todaysInstallment" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
-                <td data-th="Installment No.: " class="top-purpal-color-row2">{{obj.installmentNumber}}</td>
-                <td data-th="Installment Amount: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
-                <td data-th="Payment Due Date: " class="top-purpal-color-row2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>
-                <td data-th="Actual Payment Date: " class="top-purpal-color-row2">{{obj.paymentDate | date: 'dd/MM/yyyy'}}</td>
-                <td data-th="Status: " class="top-purpal-color-row2">
-                    <button ng-class="obj.status == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Paid</button>
-                    <button ng-class="obj.status == 0 ? 'unpaid-btn-link' : 'unpaid-btn-link'" ng-click="vm.unpaid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Unpaid</button>
-                </td>
-            </tr>
-        </table>
+        <div class="col-md-9">
+            <div>Today's Installments</div>
+            <!--<div ng-repeat="obj in vm.todaysInstallment">
+                {{obj.Loan.Customer.name}} <br> {{obj.installmentNumber}} <br> {{obj.installmentAmount}} <br> 
+                <button ng-class="obj.status == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Paid</button>
+                <button ng-class="obj.status == 0 ? 'unpaid-btn-link' : 'unpaid-btn-link'" ng-click="vm.unpaid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Unpaid</button>
+            </div>-->
 
+            <table class="table-part" border="0" cellspacing="0" cellpadding="0" style="margin-top: 25px;float: left;">
+                <tr class="top-purpal-color-row">
+                    <th>Customer Name</th>
+                    <th>Installment No.</th>
+                    <th>Installment Amount</th>
+                    <th>Payment Due Date</th>
+                    <th>Actual Payment Date</th>
+                    <th class="paid-status-width">Status</th>
+                </tr>
+                <tr ng-repeat="obj in vm.todaysInstallment" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
+                    <td data-th="Customer Name: " class="top-purpal-color-row2">{{obj.Loan.Customer.name}}</td>
+                    <td data-th="Installment No.: " class="top-purpal-color-row2">{{obj.installmentNumber}}</td>
+                    <td data-th="Installment Amount: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
+                    <td data-th="Payment Due Date: " class="<top-purpal-color-r></top-purpal-color-r>ow2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>
+                    <td data-th="Actual Payment Date: " class="top-purpal-color-row2">{{obj.paymentDate | date: 'dd/MM/yyyy'}}</td>
+                    <td data-th="Status: " class="top-purpal-color-row2">
+                        <button ng-class="obj.status == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Paid</button>
+                        <button ng-class="obj.status == 0 ? 'unpaid-btn-link' : 'unpaid-btn-link'" ng-click="vm.unpaid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Unpaid</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
     </div>
 </div>
