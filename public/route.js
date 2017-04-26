@@ -41,14 +41,6 @@
                 controller: 'HomeController',
                 controllerAs: 'vm'
             })
-            .state('secure.dashboard', {
-                url: '/dashboard',
-                templateUrl: '/dashboard/dashboard.html',
-                title: 'Dashboard',
-                highlight: 'dashboard',
-                controller: 'DashboardController',
-                controllerAs: 'vm'
-            })
             .state('secure.customer', {
                 url: '/customer',
                 templateUrl: '/customer/customer.html',
@@ -114,30 +106,6 @@
                 controller: 'ReportsController',
                 controllerAs: 'vm'
             })
-            .state('secure.stats', {
-                url: '/stats',
-                templateUrl: '/stats/stats.html',
-                title: 'Stats',
-                highlight: 'tats',
-                controller: 'StatsController',
-                controllerAs: 'vm'
-            })
-            .state('secure.notifications', {
-                url: '/notifications',
-                templateUrl: '/notifications/notifications.html',
-                title: 'Notifications',
-                highlight: 'notifications',
-                controller: 'NotificationsController',
-                controllerAs: 'vm'
-            })
-            .state('secure.invoice', {
-                url: '/invoice',
-                templateUrl: '/order/invoice.html',
-                title: 'Invoice',
-                highlight: 'invoice',
-                controller: 'OrderController',
-                controllerAs: 'vm'
-            })
             .state('secure.setting', {
                 url: '/setting',
                 templateUrl: '/setting/setting.html',
@@ -177,46 +145,55 @@
                 controller: 'UserController',
                 controllerAs: 'vm'
             })
-            .state('secure.setting.material', {
-                url: '/material',
-                templateUrl: '/setting/material/material.html',
-                title: 'Material',
-                highlight: 'material',
+            .state('secure.setting.agent', {
+                url: '/agent',
+                templateUrl: '/setting/agent/agent.html',
+                title: 'Agent',
+                highlight: 'agent',
                 highLightSetting: 'setting',
-                controller: 'MaterialController',
+                controller: 'AgentController',
                 controllerAs: 'vm'
             })
-            .state('secure.setting.edit-material', {
-                url: '/material/{id}',
+            .state('secure.setting.latefee', {
+                url: '/latefee',
+                templateUrl: '/setting/latefee/latefee.html',
+                title: 'LateFees',
+                highlight: 'latefee',
+                highLightSetting: 'setting',
+                controller: 'AgentController',
+                controllerAs: 'vm'
+            })
+            .state('secure.setting.edit-agent', {
+                url: '/agent/{id}',
                 params: {
                     id: { value: 'new' }
                 },
-                templateUrl: '/setting/material/edit-material.html',
-                title: 'Material',
-                highlight: 'material',
+                templateUrl: '/setting/agent/edit-agent.html',
+                title: 'Agent',
+                highlight: 'agent',
                 highLightSetting: 'setting',
-                controller: 'MaterialController',
+                controller: 'AgentController',
                 controllerAs: 'vm'
             })
-            .state('secure.setting.orderstatus', {
-                url: '/orderstatus',
-                templateUrl: '/setting/orderstatus/orderstatus.html',
-                title: 'OrderStatus',
-                highlight: 'orderstatus',
+            .state('secure.setting.loanoption', {
+                url: '/loanoption',
+                templateUrl: '/setting/loanoption/loanoption.html',
+                title: 'LoanOption',
+                highlight: 'loanoption',
                 highLightSetting: 'setting',
-                controller: 'OrderStatusController',
+                controller: 'LoanOptionController',
                 controllerAs: 'vm'
             })
-            .state('secure.setting.edit-orderstatus', {
-                url: '/orderstatus/{id}',
+            .state('secure.setting.edit-loanoption', {
+                url: '/loanoption/{id}',
                 params: {
                     id: { value: 'new' }
                 },
-                templateUrl: '/setting/orderstatus/edit-orderstatus.html',
-                title: 'OrderStatus',
-                highlight: 'orderstatus',
+                templateUrl: '/setting/loanoption/edit-loanoption.html',
+                title: 'LoanOption',
+                highlight: 'loanoption',
                 highLightSetting: 'setting',
-                controller: 'OrderStatusController',
+                controller: 'LoanOptionController',
                 controllerAs: 'vm'
             })
             ;

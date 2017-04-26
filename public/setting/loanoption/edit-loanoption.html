@@ -1,0 +1,85 @@
+﻿<div class="managecustomer-right-bx">
+
+    <h4 class="admin-setting-heding">Add/Edit Loan Option</h4>
+
+    <form name="loanOptionForm" novalidate>
+
+        <div class="order-form-left-section add-new-form">
+
+            <div class="form-section-box form-section-box-2">
+
+                <div class="form-box">
+                    <label>Loan Option<em id="mandatory" style="color:Red">*</em></label>
+                    <input name="title" required type="text" ng-model="vm.loanOption.title" ng-minlength="2" ng-maxlength="30">
+                    <span ng-if="(loanOptionForm.title.$dirty || vm.isSubmitted)  && loanOptionForm.title.$error.required"><i><b>Loan Option</b></i> is required.</span>
+                    <span ng-if="(loanOptionForm.title.$dirty || vm.isSubmitted)  && loanOptionForm.title.$error.minlength"><i><b>Loan Option</b></i> should be at least 2 characters long.</span>
+                    <span ng-if="(loanOptionForm.title.$dirty || vm.isSubmitted)  && loanOptionForm.title.$error.maxlength"><i><b>Loan Option</b></i> should not be more than 30 characters long.</span>
+
+                </div>
+
+                <div class="form-box">
+                    <label>Interest Rate (%)<em id="mandatory" style="color:Red">*</em></label>
+                    <input name="interestRate" required type="text" ng-model="vm.loanOption.interestRate" ng-minlength="2" ng-maxlength="30">
+                    <span ng-if="(loanOptionForm.interestRate.$dirty || vm.isSubmitted)  && loanOptionForm.interestRate.$error.required"><i><b>Interest Rate</b></i> is required.</span>
+                    <span ng-if="(loanOptionForm.interestRate.$dirty || vm.isSubmitted)  && loanOptionForm.interestRate.$error.minlength"><i><b>Interest Rate</b></i> should be at least 2 characters long.</span>
+                    <span ng-if="(loanOptionForm.interestRate.$dirty || vm.isSubmitted)  && loanOptionForm.interestRate.$error.maxlength"><i><b>Interest Rate</b></i> should not be more than 30 characters long.</span>
+
+                </div>
+
+                <div class="form-box" style="margin-bottom: 10px;">
+                    <label>Include Charges</label>
+                    <input ng-init="vm.loanOption.includeCharges = true" ng-model="vm.loanOption.includeCharges" class="billing-addres-checkbox clothcheck"
+                        type="checkbox">
+                </div>
+
+                <div ng-if="vm.loanOption.includeCharges">
+
+                    <div class="form-box">
+                        <label><em id="mandatory" style="color:Red">*</em>Ins. & Other</label>
+                        <input id="insOther" name="insOther" required type="number" ng-model="vm.loanOption.insOther" ng-minlength="2" ng-maxlength="30">
+                        <span ng-if="(loanOptionForm.insOther.$dirty || vm.isSubmitted)  && loanOptionForm.insOther.$error.required"><i><b>Other Charges</b></i> is required.</span>
+                        <span ng-if="(loanOptionForm.insOther.$dirty || vm.isSubmitted)  && loanOptionForm.insOther.$error.minlength"><i><b>Other Charges</b></i> should be at least 2 characters long.</span>
+                        <span ng-if="(loanOptionForm.insOther.$dirty || vm.isSubmitted)  && loanOptionForm.insOther.$error.maxlength"><i><b>Other Charges</b></i> should not be more than 30 characters long.</span>
+
+                    </div>
+
+                    <div class="form-box">
+                        <label><em id="mandatory" style="color:Red">*</em>Processing Charge</label>
+                        <input id="processingCharge" name="processingCharge" required type="number" ng-model="vm.loanOption.processingCharge" ng-minlength="2"
+                            ng-maxlength="30">
+                        <span ng-if="(loanOptionForm.processingCharge.$dirty || vm.isSubmitted)  && loanOptionForm.processingCharge.$error.required"><i><b>Other Charges</b></i> is required.</span>
+                        <span ng-if="(loanOptionForm.processingCharge.$dirty || vm.isSubmitted)  && loanOptionForm.processingCharge.$error.minlength"><i><b>Other Charges</b></i> should be at least 2 characters long.</span>
+                        <span ng-if="(loanOptionForm.processingCharge.$dirty || vm.isSubmitted)  && loanOptionForm.processingCharge.$error.maxlength"><i><b>Other Charges</b></i> should not be more than 30 characters long.</span>
+
+                    </div>
+
+                </div>
+
+                <div class="form-box">
+                    <label>Is Active</label>
+                    <input ng-model="vm.loanOption.isActive" class="billing-addres-checkbox clothcheck" type="checkbox">
+                </div>
+
+                <div class="register-btm-btn-box register-btm-btn-box-left-mar">
+
+                    <div class="submit-error" ng-if="vm.error">
+                        <div>{{vm.error}}</div>
+                    </div>
+
+                    <div class="submit-button">
+                        <input ng-disabled="vm.startProcessing" value="Save" class="register-submit-btn" type="button" ng-click="vm.save(loanOptionForm)">
+                    </div>
+
+                    <div class="cancel-button">
+                        <input value="Cancel" class="register-cancel-btn" type="button" ui-sref="secure.setting.loanoption">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

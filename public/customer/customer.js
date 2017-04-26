@@ -5,9 +5,9 @@
 
     angular.module('myra').controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['Authentication', 'Restangular', '$http', '$state', 'SweetAlert', '$stateParams', 'Upload'];
+    CustomerController.$inject = ['Authentication', 'Restangular', '$http', '$state', '$stateParams', 'Upload'];
 
-    function CustomerController(Authentication, Restangular, $http, $state, SweetAlert, $stateParams, Upload) {
+    function CustomerController(Authentication, Restangular, $http, $state, $stateParams, Upload) {
         var vm = this;
         vm.list = [];
         vm.file = [];

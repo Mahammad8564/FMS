@@ -5,9 +5,9 @@
 
     angular.module('myra').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['Authentication', 'Restangular', '$http', '$state', 'SweetAlert', '$stateParams'];
+    HomeController.$inject = ['Authentication', 'Restangular', '$http', '$state', '$stateParams'];
 
-    function HomeController(Authentication, Restangular, $http, $state, SweetAlert, $stateParams) {
+    function HomeController(Authentication, Restangular, $http, $state, $stateParams) {
         var vm = this;
         vm.editCustomer = editCustomer;
         vm.getCustomerList = getCustomerList;

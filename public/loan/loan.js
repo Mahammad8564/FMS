@@ -5,9 +5,9 @@
 
     angular.module('myra').controller('LoanController', LoanController);
 
-    LoanController.$inject = ['Authentication', 'Restangular', '$state', 'SweetAlert', '$stateParams'];
+    LoanController.$inject = ['Authentication', 'Restangular', '$state', '$stateParams'];
 
-    function LoanController(Authentication, Restangular, $state, SweetAlert, $stateParams) {
+    function LoanController(Authentication, Restangular, $state, $stateParams) {
         var vm = this;
         vm.list = [];
         vm.paid = paid;

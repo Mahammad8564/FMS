@@ -1,0 +1,57 @@
+﻿<div class="managecustomer-right-bx">
+
+    <h4 class="admin-setting-heding">Add/Edit Agent</h4>
+
+    <form name="agentForm" novalidate>
+
+        <div class="order-form-left-section add-new-form">
+
+            <div class="form-section-box form-section-box-2">
+
+                <div class="form-box">
+                    <label><em id="mandatory" style="color:Red">*</em>Agent Name</label>
+                    <input id="name" name="name" required type="text" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-model="vm.agent.name" ng-minlength="2"
+                        ng-maxlength="30">
+                    <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.pattern">No special characters are allowed.</span>
+                    <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.required"><i><b>Agent Name</b></i> is required.</span>
+                    <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.minlength"><i><b>Agent Name</b></i> should be at least 2 characters long.</span>
+                    <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.maxlength"><i><b>Agent Name</b></i> should not be more than 30 characters long.</span>
+                </div>
+
+                <div class="form-box">
+                    <label><em id="mandatory" style="color:Red">*</em>Mobile Number</label>
+                    <input ng-model="vm.agent.mobileNumber" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10" required
+                        type="text">
+                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && agentForm.mobile.$error.required"><i><b>Mobile Number</b></i> is required.</span>
+                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && (agentForm.mobile.$error.pattern || agentForm.mobile.$error.minlength || agentForm.mobile.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
+                </div>
+
+                <div class="form-box">
+                    <label>Address</label>
+                    <textarea ng-model="vm.agent.address" rows="2" cols="50"></textarea>
+                </div>
+
+                <div class="form-box">
+                    <label>Is Active</label>
+                    <input ng-model="vm.agent.isActive" class="billing-addres-checkbox clothcheck" type="checkbox">
+                </div>
+
+                <div class="register-btm-btn-box register-btm-btn-box-left-mar">
+                    <div class="submit-error" ng-if="vm.error">
+                        <span>{{vm.error}}</span>
+                    </div>
+                    <div class="submit-button">
+                        <input ng-disabled="vm.startProcessing" value="Save" class="register-submit-btn" type="button" ng-click="vm.save(agentForm)">
+                    </div>
+                    <div class="cancel-button">
+                        <input value="Cancel" class="register-cancel-btn" type="button" ui-sref="secure.setting.agent">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

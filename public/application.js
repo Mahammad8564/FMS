@@ -3,7 +3,6 @@ var mainApplicationModule = angular.module(mainApplicationModuleName ,
     [
         'ui.router',
         'restangular',
-        'oitozero.ngSweetAlert',
         'ngFileUpload',
         'ui.bootstrap',
         'checklist-model'

@@ -5,9 +5,9 @@
 
     angular.module('myra').controller('UserController', UserController);
 
-    UserController.$inject = ['Restangular', '$state', 'SweetAlert', '$stateParams', 'Authentication'];
+    UserController.$inject = ['Restangular', '$state', '$stateParams', 'Authentication'];
 
-    function UserController(Restangular, $state, SweetAlert, $stateParams, Authentication) {
+    function UserController(Restangular, $state, $stateParams, Authentication) {
         var vm = this;
         vm.currentUser = Authentication.user;
         vm.list = [];
