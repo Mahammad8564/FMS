@@ -27,8 +27,7 @@
                     <tr>
                         <td class="table-loan-page"><b>Agent</b></td>
                         <td class="table-loan-page2" ng-init="vm.getAgentList()">
-                            <select placeholder="Select Agent" name="AgentId" ng-model="vm.AgentId"
-                                ng-change="vm.selectAgent(vm.AgentId)" ng-disabled="vm.AgentId">
+                            <select placeholder="Select Agent" name="AgentId" ng-model="vm.AgentId" ng-change="vm.selectAgent(vm.AgentId)" ng-disabled="vm.AgentId">
                                 <option ng-value="{{os.id}}" ng-repeat="os in vm.agents | filter : {isActive : true}">{{os.name}}</option>
                             </select>
                         </td>
@@ -47,7 +46,11 @@
                 <tr ng-repeat="obj in vm.loanDetail" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
                     <td data-th="Installment No.: " class="top-purpal-color-row2">{{obj.installmentNumber}}</td>
                     <td data-th="Installment Amount: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
-                    <td data-th="Payment Due Date: " class="top-purpal-color-row2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>
+                    <td data-th="Payment Due Date: " class="top-purpal-color-row2">
+                        <!--{{obj.dueDate | date: 'dd/MM/yyyy'}}-->
+                        <input type="date" readonly name="dueDate" uib-datepicker-popup="" is-open="open.dueDate" convert-to-date ng-model="obj.dueDate"
+                            ng-click="open.dueDate = !open.dueDate">
+                    </td>
                     <td data-th="Actual Payment Date: " class="top-purpal-color-row2">{{obj.paymentDate | date: 'dd/MM/yyyy'}}</td>
                     <td data-th="Status: " class="top-purpal-color-row2">
                         <button ng-class="obj.status == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Paid</button>

@@ -42,10 +42,10 @@
                 return;
             }
             vm.startProcessing = true;
-            vm.agent.UserId = Authentication.user.id;
+            // vm.agent.UserId = Authentication.user.id;
             if (!vm.agent.id) {
                 Restangular.all('api/agent').post(vm.agent).then(function (res) {
-                    SweetAlert.swal("Material saved successfully!");
+                    //swal("Material saved successfully!");
                     $state.go('secure.setting.agent');
                 }, function (err) {
                     vm.error = err.data.message;
@@ -54,7 +54,7 @@
             }
             else {
                 Restangular.one('api/agent/' + vm.agent.id).patch(vm.agent).then(function (res) {
-                    SweetAlert.swal("Material updated successfully!");
+                    //swal("Material updated successfully!");
                     $state.go('secure.setting.agent');
                 }, function (err) {
                     vm.error = err.data.message;

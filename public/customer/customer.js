@@ -137,7 +137,7 @@
                 }
                 else {
                     Restangular.one('api/customer/' + vm.customer.id).patch(vm.customer).then(function (res) {
-                        SweetAlert.swal("customer updated successfully!");
+                        //swal("customer updated successfully!");
                         $state.go('secure.customer');
                     });
                 }
@@ -176,7 +176,7 @@
                 url: url,
                 data: { file: vm.file, customer: vm.customer }
             }).then(function (resp) {
-                SweetAlert.swal("customer saved successfully!");
+                //swal("customer saved successfully!");
                 $state.go('secure.customer');
             }, function (resp) {
                 vm.error = resp.data.message;

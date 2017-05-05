@@ -54,6 +54,7 @@ module.exports = function(){
     require('../app/routes/loan.js')(app);
     require('../app/routes/loanOption.js')(app);
     require('../app/routes/installment')(app);
+    require('../app/routes/latefee')(app);
 
     app.use(express.static('./public'));
     app.use(express.static('./uploads'));

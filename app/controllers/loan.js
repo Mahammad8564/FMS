@@ -4,6 +4,7 @@ var Installment = models.Installment;
 var Customer = models.Customer;
 var LoanOption = models.LoanOption;
 var User = models.User;
+var Agent = models.Agent;
 var Sequelize = require('sequelize');
 var _ = require('underscore');
 var lodash = require('lodash');
@@ -40,7 +41,7 @@ exports.read = function (req, res) {
 exports.getById = function (req, res, next) {
     Loan.findOne({
         where: { id: req.params.loanId },
-        include: [Customer]
+        include: [Customer,Agent]
     }).then(function (obj) {
         req.loan = obj;
         next();

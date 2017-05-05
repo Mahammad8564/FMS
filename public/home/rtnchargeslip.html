@@ -1,0 +1,103 @@
+<div class="inner-heading-bar">Home</div>
+
+<div class="main-contant-part minpageheight" ng-init="vm.activate()">
+
+    <div class="right-add-new-button">
+        <span>Installment and Return Charge Pending</span>
+        <a href="" ng-click="vm.print('printable')">Print</a>
+    </div>
+
+    <div class="home-icons-box" id="printable">
+
+        <div class="col-md-12">
+            <table class="table-part" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #c8c8c8 !important;">
+                <tbody>
+                    <tr>
+                        <td class="table-loan-page"><b>Name</b></td>
+                        <td class="table-loan-page2">{{vm.customer.name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Date</b></td>
+                        <td class="table-loan-page2">{{vm.today | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Mobile Number</b></td>
+                        <td class="table-loan-page2">{{vm.customer.mobile}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Address</b></td>
+                        <td class="table-loan-page2">{{vm.customer.address}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <table class="table-part" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #c8c8c8 !important;">
+                <tbody>
+                    <tr>
+                        <td class="table-loan-page"><b>Loan Amount</b></td>
+                        <td class="table-loan-page2">{{vm.loan.disbursementAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Installment Amount</b></td>
+                        <td class="table-loan-page2">{{vm.loan.installmentAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Cheque Date</b></td>
+                        <td class="table-loan-page2">{{}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Cheque Number</b></td>
+                        <td class="table-loan-page2">{{}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Return Charge</b></td>
+                        <td class="table-loan-page2">{{}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Day Wise Penalty</b></td>
+                        <td class="table-loan-page2">{{}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table-part" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #c8c8c8 !important;">
+                <tbody>
+                    <tr>
+                        <td class="table-loan-page"><b>Total Amount</b></td>
+                        <td class="table-loan-page2">{{vm.loan.disbursementAmount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <table class="table-part" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #c8c8c8 !important;">
+                <tbody>
+                    <tr>
+                        <td class="table-loan-page"><b>Guarantor Name</b></td>
+                        <td class="table-loan-page2">{{vm.loan.guarantorName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Mobile Number</b></td>
+                        <td class="table-loan-page2">{{vm.loan.mobileNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Address</b></td>
+                        <td class="table-loan-page2">{{vm.loan.address}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Agent Name</b></td>
+                        <td class="table-loan-page2">{{vm.loan.Agent.name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-loan-page"><b>Mobile Number</b></td>
+                        <td class="table-loan-page2">{{vm.loan.Agent.mobileNumber}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

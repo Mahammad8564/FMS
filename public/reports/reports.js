@@ -53,7 +53,7 @@
                         var endDate = new Date();
                         endDate.setHours(0, 0, 0, 0);
 
-                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: endDate, end: endDate };
+                        var newObj = { CustomerId: vm.custId, LoanOptionId: vm.user.roles, start: endDate, end: endDate };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
                             vm.CustomerBasedReports = res.data;
                         }, function (err) {
@@ -67,7 +67,7 @@
                         var endDate = new Date();
                         endDate.setHours(0, 0, 0, 0);
 
-                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
+                        var newObj = { CustomerId: vm.custId, LoanOptionId: vm.user.roles, start: startDate, end: endDate };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
                             vm.CustomerBasedReports = res.data;
                         }, function (err) {
@@ -81,7 +81,7 @@
                         var endDate = new Date();
                         endDate.setHours(0, 0, 0, 0);
 
-                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
+                        var newObj = { CustomerId: vm.custId, LoanOptionId: vm.user.roles, start: startDate, end: endDate };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
                             vm.CustomerBasedReports = res.data;
                         }, function (err) {
@@ -94,7 +94,7 @@
 
             }
             else {
-                var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: vm.datefrom3, end: vm.dateto3 };
+                var newObj = { CustomerId: vm.custId, LoanOptionId: vm.user.roles, start: vm.datefrom3, end: vm.dateto3 };
                 Restangular.all('api/customerreport').post(newObj).then(function (res) {
                     vm.CustomerBasedReports = res.data;
                 }, function (err) {
@@ -349,7 +349,7 @@
                         vm.array.push({ orderDate: start, totalamount: 0, id: '-' })
                     }
 
-                    Restangular.all('api/customerreport').post({ CustomerId: vm.custId, OrderStatusId: 1, start: startDate, end: endDate }).then(function (res) {
+                    Restangular.all('api/customerreport').post({ CustomerId: vm.custId, LoanOptionId: 1, start: startDate, end: endDate }).then(function (res) {
                         res.data.forEach(function (element) {
                             var orderDate = new Date(element.orderDate);
                             orderDate.setHours(0, 0, 0, 0);

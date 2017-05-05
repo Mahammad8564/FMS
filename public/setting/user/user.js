@@ -60,7 +60,7 @@
             if (vm.currentUser.pwd == vm.user1.oldPassword) {
                 vm.error = '';
                 Restangular.one('api/user/' + vm.user.id + '/reset').patch(vm.user1).then(function (res) {
-                    SweetAlert.swal("Password reset successfully!");
+                    //swal("Password reset successfully!");
                     // $state.go('secure.setting.user');
                 }, function (err) {
                     console.log(err);
@@ -93,7 +93,7 @@
                     return true;
                 }
                 Restangular.all('api/user').post(vm.user).then(function (res) {
-                    SweetAlert.swal("User saved successfully!");
+                    //swal("User saved successfully!");
                     $state.go('secure.setting.user');
                 }, function (err) {
                     console.log(err);
@@ -103,7 +103,7 @@
             }
             else {
                 Restangular.one('api/user/' + vm.user.id).patch(vm.user).then(function (res) {
-                    SweetAlert.swal("User updated successfully!");
+                    //swal("User updated successfully!");
                     $state.go('secure.setting.user');
                 }, function (err) {
                     console.log(err);

@@ -51,6 +51,7 @@
                     vm.insOther = res.data.insOther;
                     vm.processingCharge = res.data.processingCharge;
                 }
+                vm.calculate(vm.loan.disbursementAmount,vm.loan.loanTenure);
             });
         }
 
@@ -64,6 +65,24 @@
                 // vm.loan.insOther = Math.round((disbursementAmount * vm.insOther) / 10000);
                 // vm.loan.processingCharge = Math.round((disbursementAmount * vm.processingCharge) / 10000);
                 vm.loan.loanAmount = disbursementAmount - vm.loan.insOther - vm.loan.processingCharge;
+            }
+
+            switch (vm.loanTenureOption) {
+                case 1:
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), Math.round(vm.loan.loanTenure / 30.4167))) / (Math.pow((1 + vm.interestRate), Math.round(vm.loan.loanTenure / 30.4167)) - 1));
+                    break;
+                case 2:
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), Math.round(vm.loan.loanTenure / 4.34524))) / (Math.pow((1 + vm.interestRate), Math.round(vm.loan.loanTenure / 4.34524)) - 1));
+                    break;
+                case 3:
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), vm.loan.loanTenure)) / (Math.pow((1 + vm.interestRate), vm.loan.loanTenure) - 1));
+                    break;
+                case 4:
+                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), (vm.loan.loanTenure * 12))) / (Math.pow((1 + vm.interestRate), (vm.loan.loanTenure * 12)) - 1));
+                    break;
+
+                default:
+                    break;
             }
         }
 
@@ -82,33 +101,36 @@
                 vm.isSubmitted = true;
                 return;
             }
-            switch (vm.loanTenureOption) {
-                case 1:
-                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), (vm.loan.loanTenure / 30))) / (Math.pow((1 + vm.interestRate), (vm.loan.loanTenure / 30)) - 1));
-                    break;
-                case 2:
-                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), (vm.loan.loanTenure / 4))) / (Math.pow((1 + vm.interestRate), (vm.loan.loanTenure / 4)) - 1));
-                    break;
-                case 3:
-                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), vm.loan.loanTenure)) / (Math.pow((1 + vm.interestRate), vm.loan.loanTenure) - 1));
-                    break;
-                case 4:
-                    vm.loan.installmentAmount = Math.round((vm.loan.disbursementAmount * vm.interestRate * Math.pow((1 + vm.interestRate), (vm.loan.loanTenure * 12))) / (Math.pow((1 + vm.interestRate), (vm.loan.loanTenure * 12)) - 1));
-                    break;
 
-                default:
-                    break;
-            }
             vm.startProcessing = true;
             vm.loan.interestRate = vm.interestRate;
-            vm.loan.status = 'Unpaid';
-            vm.loan.loanOptionId = vm.loanTypeId;
+            // vm.loan.status = 'Unpaid';
+            vm.loan.LoanOptionId = vm.loanTypeId;
             vm.loan.loanTenureOption = vm.loanTenureOption;
-            if (vm.customer) {
+            if (!vm.CustomerId) {
+                vm.customer.docStatus = 1;
                 Restangular.all('api/customer').post({ customer: vm.customer }).then(function (res) {
                     vm.loan.CustomerId = res.data.id;
+                    preSave();
+                }, function (err) {
+                    console.log(err);
+                    vm.error = err.data.message;
+                    vm.startProcessing = false;
+                });
+
+            }
+            else {
+                vm.loan.CustomerId = vm.CustomerId;
+                preSave();
+            }
+        }
+
+        function preSave() {
+            if (!vm.AgentId) {
+                Restangular.all('api/agent').post(vm.agent).then(function (res) {
+                    vm.loan.AgentId = res.data.id;
                     Restangular.all('api/loan').post(vm.loan).then(function (res) {
-                        SweetAlert.swal("loan saved successfully!");
+                        //swal("loan saved successfully!");
                         // $state.go('secure.loan');
                         $state.go('secure.loan-detail', { id: res.data.id });
                     }, function (err) {
@@ -116,29 +138,15 @@
                         vm.error = err.data.message;
                         vm.startProcessing = false;
                     });
-
                 }, function (err) {
-                    console.log(err);
-                    vm.error = err.data.message;
-                    vm.startProcessing = false;
-                });
-
-            }
-            else if (!vm.loan.id) {
-                vm.loan.CustomerId = vm.CustomerId;
-                Restangular.all('api/loan').post(vm.loan).then(function (res) {
-                    SweetAlert.swal("loan saved successfully!");
-                    // $state.go('secure.loan');
-                    $state.go('secure.loan-detail', { id: res.data.id });
-                }, function (err) {
-                    console.log(err);
                     vm.error = err.data.message;
                     vm.startProcessing = false;
                 });
             }
             else {
-                Restangular.one('api/loan/' + vm.loan.id).patch(vm.loan).then(function (res) {
-                    SweetAlert.swal("loan updated successfully!");
+                vm.loan.AgentId = vm.AgentId;
+                Restangular.all('api/loan').post(vm.loan).then(function (res) {
+                    //swal("loan saved successfully!");
                     // $state.go('secure.loan');
                     $state.go('secure.loan-detail', { id: res.data.id });
                 }, function (err) {
@@ -211,7 +219,7 @@
         function getCustomerByLoan() {
             vm.headerId = $stateParams.id;
             Restangular.one('api/installment/' + $stateParams.id).get().then(function (res) {
-                
+
                 var groupedByMonth = _.groupBy(res.data, function (item) {
                     return item.dueDate.substring(0, 7);
                 });

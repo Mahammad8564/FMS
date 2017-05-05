@@ -172,7 +172,7 @@
                 title: 'LateFees',
                 highlight: 'latefee',
                 highLightSetting: 'setting',
-                controller: 'AgentController',
+                controller: 'LateFeeController',
                 controllerAs: 'vm'
             })
             .state('secure.setting.edit-latefee', {
@@ -184,7 +184,7 @@
                 title: 'Late Fee',
                 highlight: 'latefee',
                 highLightSetting: 'setting',
-                controller: 'AgentController',
+                controller: 'LateFeeController',
                 controllerAs: 'vm'
             })
             .state('secure.setting.loanoption', {
@@ -206,6 +206,18 @@
                 highlight: 'loanoption',
                 highLightSetting: 'setting',
                 controller: 'LoanOptionController',
+                controllerAs: 'vm'
+            })
+            .state('secure.rtnchargeslip', {
+                url: '/rtnchargeslip/{id}',
+                params: {
+                    id: { value: 'new' }
+                },
+                templateUrl: '/home/rtnchargeslip.html',
+                title: 'Home',
+                highlight: 'home',
+                // highLightSetting: 'setting',
+                controller: 'HomeController',
                 controllerAs: 'vm'
             })
             ;

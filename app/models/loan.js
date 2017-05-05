@@ -43,15 +43,16 @@ module.exports = function (sequelize, DataTypes) {
         },
         mobileNumber: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         address: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         status: {
             type: DataTypes.STRING,
             allowNull: false,
+            defaultValue: 'Unpaid'
         },
         isActive: {
             type: DataTypes.BOOLEAN,

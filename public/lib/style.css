@@ -1022,8 +1022,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
     margin-bottom:0px;
 }
 
-.right-add-new-button{float: right;}
+.right-add-new-button span{    
+    float: left;
+    font-size: 23px;
+    margin-top: 5px;
+    margin-left: 15px;
+}
 .right-add-new-button a{
+  float: right;
   width:105px;
   text-align: center;
   cursor: pointer;
@@ -1041,7 +1047,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#016364', end
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
-  display: inline-block;
+  /*display: inline-block;*/
   box-shadow: none;
 }
 .right-add-new-button a:hover{background: #008687;color: #fff !important;text-decoration: none;}

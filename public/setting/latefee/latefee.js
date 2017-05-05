@@ -11,7 +11,7 @@
         vm.save = save;
         vm.edit = edit;
         vm.getList = getList;
-        vm.agent = {
+        vm.latefee = {
             isActive: true
         };
         vm.search = search;
@@ -24,13 +24,13 @@
             search: ''
         }
         if ($stateParams.id && $stateParams.id != 'new') {
-            Restangular.one('api/agent/' + $stateParams.id).get().then(function (res) {
-                vm.agent = res.data;
+            Restangular.one('api/latefee/' + $stateParams.id).get().then(function (res) {
+                vm.latefee = res.data;
             });
         }
 
         function edit(obj) {
-            $state.go('secure.setting.edit-agent', { id: obj.id });
+            $state.go('secure.setting.edit-latefee', { id: obj.id });
         }
 
         function save(form) {
@@ -42,20 +42,20 @@
                 return;
             }
             vm.startProcessing = true;
-            vm.agent.UserId = Authentication.user.id;
-            if (!vm.agent.id) {
-                Restangular.all('api/agent').post(vm.agent).then(function (res) {
-                    SweetAlert.swal("Material saved successfully!");
-                    $state.go('secure.setting.agent');
+            // vm.latefee.UserId = Authentication.user.id;
+            if (!vm.latefee.id) {
+                Restangular.all('api/latefee').post(vm.latefee).then(function (res) {
+                    //swal("Material saved successfully!");
+                    $state.go('secure.setting.latefee');
                 }, function (err) {
                     vm.error = err.data.message;
                     vm.startProcessing = false;
                 });
             }
             else {
-                Restangular.one('api/agent/' + vm.agent.id).patch(vm.agent).then(function (res) {
-                    SweetAlert.swal("Material updated successfully!");
-                    $state.go('secure.setting.agent');
+                Restangular.one('api/latefee/' + vm.latefee.id).patch(vm.latefee).then(function (res) {
+                    //swal("Material updated successfully!");
+                    $state.go('secure.setting.latefee');
                 }, function (err) {
                     vm.error = err.data.message;
                     vm.startProcessing = false;
@@ -64,7 +64,7 @@
         }
 
         function getList() {
-            Restangular.all('api/agent').getList(vm.options).then(function (res) {
+            Restangular.all('api/latefee').getList(vm.options).then(function (res) {
                 vm.list = res.data;
                 vm.options.totalItems = parseInt(res.headers('total'));
             });

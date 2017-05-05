@@ -27,8 +27,12 @@
                 </div>
 
                 <div class="form-box">
-                    <label>Address</label>
-                    <textarea ng-model="vm.agent.address" rows="2" cols="50"></textarea>
+                    <label>Address<em style="color:Red">*</em></label>
+                    <textarea required ng-model="vm.agent.address" rows="4" cols="50" name="address" ng-minlength="2"
+                        ng-maxlength="250"></textarea>
+                    <span ng-if="(agentForm.address.$dirty || vm.isSubmitted) && agentForm.address.$error.required"><i><b>Address</b></i> is required.</span>
+                    <span ng-if="(agentForm.address.$dirty || vm.isSubmitted) && agentForm.address.$error.minlength"><i><b>Address</b></i> should be at least 2 characters long.</span>
+                    <span ng-if="(agentForm.address.$dirty || vm.isSubmitted) && agentForm.address.$error.maxlength"><i><b>Address</b></i> should not be more than 250 characters long.</span>
                 </div>
 
                 <div class="form-box">

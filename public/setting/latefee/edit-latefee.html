@@ -1,8 +1,8 @@
 ﻿<div class="managecustomer-right-bx">
 
-    <h4 class="admin-setting-heding">Add/Edit Agent</h4>
+    <h4 class="admin-setting-heding">Add/Edit Late Fees</h4>
 
-    <form name="agentForm" novalidate>
+    <form name="latefeeForm" novalidate>
 
         <div class="order-form-left-section add-new-form">
 
@@ -10,41 +10,31 @@
 
                 <div class="form-box">
                     <label>Minimum Amount<em id="mandatory" style="color:Red">*</em></label>
-                    <input id="name" name="name" required type="text" ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-model="vm.agent.name" ng-minlength="2"
-                        ng-maxlength="30">
-                    <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.pattern">No special characters are allowed.</span>
-                    <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.required"><i><b>Agent Name</b></i> is required.</span>
-                    <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.minlength"><i><b>Agent Name</b></i> should be at least 2 characters long.</span>
-                    <span ng-if="(agentForm.name.$dirty || vm.isSubmitted) && agentForm.name.$error.maxlength"><i><b>Agent Name</b></i> should not be more than 30 characters long.</span>
+                    <input id="minAmount" name="minAmount" type="number" ng-model="vm.latefee.minAmount" required>
+                    <span ng-if="(latefeeForm.minAmount.$dirty || vm.isSubmitted) && latefeeForm.minAmount.$error.required"><i><b>Minimum Amount</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
                     <label>Maximum Ammount<em id="mandatory" style="color:Red">*</em></label>
-                    <input ng-model="vm.agent.mobileNumber" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10" required
-                        type="text">
-                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && agentForm.mobile.$error.required"><i><b>Mobile Number</b></i> is required.</span>
-                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && (agentForm.mobile.$error.pattern || agentForm.mobile.$error.minlength || agentForm.mobile.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
+                    <input id="maxAmount" name="maxAmount" type="number" ng-model="vm.latefee.maxAmount" required>
+                    <span ng-if="(latefeeForm.maxAmount.$dirty || vm.isSubmitted) && latefeeForm.maxAmount.$error.required"><i><b>Maximum Number</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
                     <label>Late Fee<em id="mandatory" style="color:Red">*</em></label>
-                    <input ng-model="vm.agent.mobileNumber" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10" required
-                        type="text">
-                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && agentForm.mobile.$error.required"><i><b>Mobile Number</b></i> is required.</span>
-                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && (agentForm.mobile.$error.pattern || agentForm.mobile.$error.minlength || agentForm.mobile.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
+                    <input id="lateFee" name="lateFee" type="number" ng-model="vm.latefee.lateFee" required>
+                    <span ng-if="(latefeeForm.lateFee.$dirty || vm.isSubmitted) && latefeeForm.lateFee.$error.required"><i><b>Late Fee</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
-                    <label>RTN Charge<em id="mandatory" style="color:Red">*</em></label>
-                    <input ng-model="vm.agent.mobileNumber" ng-pattern="/^[0-9]{1,10}$/" name="mobile" ng-minlength="10" ng-maxlength="10" required
-                        type="text">
-                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && agentForm.mobile.$error.required"><i><b>Mobile Number</b></i> is required.</span>
-                    <span ng-if="(agentForm.mobile.$dirty || vm.isSubmitted) && (agentForm.mobile.$error.pattern || agentForm.mobile.$error.minlength || agentForm.mobile.$error.maxlength)">Enter a valid 10-digit <i><b>Mobile Number</b></i>.</span>
+                    <label>Return Charge<em id="mandatory" style="color:Red">*</em></label>
+                    <input id="rtnCharge" name="rtnCharge" type="number" ng-model="vm.latefee.rtnCharge" required>
+                    <span ng-if="(latefeeForm.rtnCharge.$dirty || vm.isSubmitted) && latefeeForm.rtnCharge.$error.required"><i><b>Return Charge</b></i> is required.</span>
                 </div>
 
                 <div class="form-box">
                     <label>Is Active</label>
-                    <input ng-model="vm.agent.isActive" class="billing-addres-checkbox clothcheck" type="checkbox">
+                    <input ng-model="vm.latefee.isActive" class="billing-addres-checkbox clothcheck" type="checkbox">
                 </div>
 
                 <div class="register-btm-btn-box register-btm-btn-box-left-mar">
@@ -52,10 +42,10 @@
                         <span>{{vm.error}}</span>
                     </div>
                     <div class="submit-button">
-                        <input ng-disabled="vm.startProcessing" value="Save" class="register-submit-btn" type="button" ng-click="vm.save(agentForm)">
+                        <input ng-disabled="vm.startProcessing" value="Save" class="register-submit-btn" type="button" ng-click="vm.save(latefeeForm)">
                     </div>
                     <div class="cancel-button">
-                        <input value="Cancel" class="register-cancel-btn" type="button" ui-sref="secure.setting.agent">
+                        <input value="Cancel" class="register-cancel-btn" type="button" ui-sref="secure.setting.latefee">
                     </div>
                 </div>
 

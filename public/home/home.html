@@ -1,7 +1,10 @@
 ﻿<div class="inner-heading-bar">Home</div>
 
-<div class="main-contant-part minpageheight" ng-init="vm.getCustomerList()">
+<div class="main-contant-part minpageheight" ng-init="vm.getTodaysInstallment()">
+    <div class="right-add-new-button"><a ui-sref="secure.rtnchargeslip">Slip</a></div>
+
     <div class="home-icons-box">
+
 
         <div class="col-md-3">
             <div>Customer's details pending</div>
@@ -22,46 +25,12 @@
                     </div>
                 </div>
 
-
             </div>
-            <!--<table ng-init="vm.getCustomerList()" class="table-part" border="0" cellspacing="0" cellpadding="0">
-                <tr class="top-purpal-color-row">
-                    <th>Details</th>
-                    <th>
-                        <a href="" ng-click="vm.order('name',vm.asc)">
-                            <font>Customer Name</font>
-                            <span ng-if="vm.asc === true" class="">
-                                <img ng-src="/images/up-arrow-1.png" alt="">
-                            </span>
-                            <span ng-show="vm.asc === false" class="">
-                                <img ng-src="/images/down-arrow-1.png" alt="">
-                            </span>
-                        </a>
-                    </th>
-                </tr>
-                <tr ng-repeat="obj in vm.customers" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
-                    <td data-th="Details: " class="top-purpal-color-row2" style="text-align: center">
-                        <cite title="Customer details are completed."><img ng-if="obj.docStatus == 3" src="images/green.png"></cite>
-                        <cite title="Customer details are pending."><img ng-if="obj.docStatus == 2" src="images/yellow.png"></cite>
-                        <cite title="Customer details are missing."><img ng-if="obj.docStatus == 1" src="images/red.png"></cite>
-                    </td>
-                    <td data-th="Order Id: " class="top-purpal-color-row2"><a ng-click="vm.editCustomer(obj)" class="customer-name-link">{{obj.name}}</a></td>
-                    <td data-th="Order Date: " class="top-purpal-color-row2">{{obj.mobile}}</td>
-                    <td data-th="Customer Name: " class="top-purpal-color-row2">{{obj.phone}}</td>
-                    <td data-th="Status: " class="top-purpal-color-row2">{{obj.address}} </td>
-                </tr>
 
-            </table>-->
         </div>
 
         <div class="col-md-9">
             <div>Today's Installments</div>
-            <!--<div ng-repeat="obj in vm.todaysInstallment">
-                {{obj.Loan.Customer.name}} <br> {{obj.installmentNumber}} <br> {{obj.installmentAmount}} <br> 
-                <button ng-class="obj.status == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Paid</button>
-                <button ng-class="obj.status == 0 ? 'unpaid-btn-link' : 'unpaid-btn-link'" ng-click="vm.unpaid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Unpaid</button>
-            </div>-->
-
             <table class="table-part" border="0" cellspacing="0" cellpadding="0" style="margin-top: 25px;float: left;">
                 <tr class="top-purpal-color-row">
                     <th>Customer Name</th>
@@ -75,7 +44,7 @@
                     <td data-th="Customer Name: " class="top-purpal-color-row2">{{obj.Loan.Customer.name}}</td>
                     <td data-th="Installment No.: " class="top-purpal-color-row2">{{obj.installmentNumber}}</td>
                     <td data-th="Installment Amount: " class="top-purpal-color-row2">{{obj.installmentAmount}}</td>
-                    <td data-th="Payment Due Date: " class="<top-purpal-color-r></top-purpal-color-r>ow2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>
+                    <td data-th="Payment Due Date: " class="top-purpal-color-row2">{{obj.dueDate | date: 'dd/MM/yyyy'}}</td>
                     <td data-th="Actual Payment Date: " class="top-purpal-color-row2">{{obj.paymentDate | date: 'dd/MM/yyyy'}}</td>
                     <td data-th="Status: " class="top-purpal-color-row2">
                         <button ng-class="obj.status == 1 ? 'paid-btn-link' : 'unpaid-btn-link'" ng-click="vm.paid($index,obj.id)" ng-disabled="$index != 0 && vm.loanDetail[$index-1].status == 0">Paid</button>
